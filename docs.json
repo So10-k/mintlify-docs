@@ -1,16 +1,40 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "name": "Mia's Quiz Tournament",
+  "description": "Docs for Mia's Quiz Tournament — a friends-and-family bracket quiz competition, with Mia (age 8) as the in-app Author.",
   "theme": "almond",
   "colors": {
-    "primary": "#FF6B6B",
-    "light": "#FFF7ED",
-    "dark": "#1A1A2E"
+    "primary": "#E94B7E",
+    "light": "#FFD93D",
+    "dark": "#1B2A4E"
+  },
+  "favicon": "/favicon.svg",
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg",
+    "href": "https://quiz.miaswebsites.art"
   },
   "navbar": {
+    "links": [
+      {
+        "label": "Play",
+        "href": "https://quiz.miaswebsites.art/play"
+      },
+      {
+        "label": "Forum",
+        "href": "https://discuss.miaswebsites.art"
+      }
+    ],
     "primary": {
-      "type": "github",
-      "href": "https://github.com/So10-k/mias-quiz-tournament"
+      "type": "button",
+      "label": "Join the tournament",
+      "href": "https://quiz.miaswebsites.art/join"
+    }
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/So10-k/mias-quiz-tournament",
+      "website": "https://quiz.miaswebsites.art"
     }
   },
   "navigation": {
@@ -42,6 +66,14 @@
               "tournament/standings",
               "tournament/bracket",
               "tournament/predictions"
+            ]
+          },
+          {
+            "group": "The Finals",
+            "pages": [
+              "finals/overview",
+              "finals/pre-taped",
+              "finals/how-to-watch"
             ]
           }
         ]
