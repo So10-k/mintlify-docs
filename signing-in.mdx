@@ -1,7 +1,11 @@
 ---
 title: "Sign in to Mia's Quiz Tournament with MiaAuth"
+sidebarTitle: "Signing in"
 description: "Already registered? Sign back in through MiaAuth — a one-time code sent to your email, no password ever. Powered by Auth0 by Okta."
+icon: "key"
 ---
+
+import { PageSignoff } from "/snippets/page-signoff.mdx";
 
 If you've already joined the tournament, you don't need to sign up again. Head to **/signin** and tap **Sign in with MiaAuth**. MiaAuth — the tournament's email-only sign-in flow, powered by Auth0 by Okta — sends a one-time code to your inbox. Enter the code and you're back in with your account, hearts, and scores intact.
 
@@ -81,3 +85,5 @@ If Auth0 is having an outage and you absolutely need to sign in, append **`?lega
 | Magic-link lifetime (legacy) | 24 hours |
 | Session lifetime | Until you sign out or the session naturally expires |
 | Where to view delivery logs (host) | `/host/email-analytics` |
+
+<PageSignoff />

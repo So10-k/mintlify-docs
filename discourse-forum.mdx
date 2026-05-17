@@ -1,7 +1,12 @@
 ---
 title: "The Discourse Forum: Hot Takes, Predictions, Banter"
+sidebarTitle: "The forum"
 description: "Mia's Quiz Tournament has an attached Discourse forum at discuss.miaswebsites.art. Sign in once on the quiz site and your forum login follows automatically via DiscourseConnect."
+icon: "messages-square"
+tag: "NEW"
 ---
+
+import { PageSignoff } from "/snippets/page-signoff.mdx";
 
 The tournament has its own **Discourse forum** at **discuss.miaswebsites.art** — for hot takes, week-by-week banter, and the **Tournament Talk** category. You don't need a separate account: the forum trusts the quiz site's sign-in via **DiscourseConnect** (formerly known as Discourse SSO), so signing in once on the quiz site is enough for both places.
 
@@ -63,3 +68,5 @@ Signing out of Discourse only signs you out of the forum — your quiz-site sess
 <Tip>
   Cross-link: if you want the host-side of forum SSO (group sync, admin promotion, signature verification), see [MiaAuth in the Host Guide](/host/miaauth). DiscourseConnect re-uses the same Auth.js session — there's no separate auth dance.
 </Tip>
+
+<PageSignoff />

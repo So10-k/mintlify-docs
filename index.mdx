@@ -1,45 +1,122 @@
 ---
-title: "Mia's Quiz Tournament: Fun Weekly Quiz Competition"
-description: "Welcome to Mia's Quiz Tournament — a weekly quiz competition hosted by Mia. Sign up, answer questions, survive elimination, and claim the prize."
+title: "Mia's Quiz Tournament"
+sidebarTitle: "Welcome"
+description: "Welcome to Mia's Quiz Tournament — a friends-and-family weekly bracket quiz hosted by Mia (age 8). Sign up, answer questions, survive elimination, claim the prize."
+icon: "sun"
+mode: "wide"
 ---
 
-Welcome to **Mia's Quiz Tournament** — a fun, friendly quiz competition where you answer questions each week, collect hearts, and try to outlast the competition. Sign up with just your name and email — sign-in runs through **MiaAuth**, our email-only auth flow (powered by Auth0 by Okta on the front door, and Auth.js underneath), so there's no password to manage. Every week a new quiz round drops; get enough answers right to stay in the game.
+import { MiaSays } from "/snippets/mia-says.mdx";
+
+{/* ── Custom hero — picture-book panel with mascot, season tagline,
+    and the two doors (sign up / how to play). Inline SVG + inline
+    styles so it works without custom CSS. ── */}
+
+<div style={{ position: "relative", overflow: "hidden", borderRadius: "32px", border: "4px solid #1B2A4E", boxShadow: "10px 10px 0 #1B2A4E", marginBottom: "32px", background: "linear-gradient(160deg, #FFD93D 0%, #FF8C42 100%)", padding: "48px 36px 36px" }}>
+  <div style={{ position: "absolute", left: "-60px", top: "-60px", width: "240px", height: "240px", background: "rgba(255,255,255,0.35)", borderRadius: "50%" }} />
+  <div style={{ position: "absolute", right: "-80px", bottom: "-80px", width: "260px", height: "260px", background: "rgba(27,42,78,0.16)", borderRadius: "50%" }} />
+  <div style={{ position: "relative", display: "flex", alignItems: "center", gap: "24px", flexWrap: "wrap" }}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="128" height="128" style={{ flexShrink: 0 }}>
+      <g stroke="#1B2A4E" strokeWidth="3.5" strokeLinecap="round" fill="none">
+        <line x1="32" y1="3"  x2="32" y2="11"/>
+        <line x1="32" y1="53" x2="32" y2="61"/>
+        <line x1="3"  y1="32" x2="11" y2="32"/>
+        <line x1="53" y1="32" x2="61" y2="32"/>
+        <line x1="11.5" y1="11.5" x2="17"   y2="17"/>
+        <line x1="47"   y1="47"   x2="52.5" y2="52.5"/>
+        <line x1="11.5" y1="52.5" x2="17"   y2="47"/>
+        <line x1="47"   y1="17"   x2="52.5" y2="11.5"/>
+      </g>
+      <circle cx="32" cy="32" r="20" fill="#FFD93D" stroke="#1B2A4E" strokeWidth="3.5"/>
+      <circle cx="22" cy="34" r="3" fill="#FF6B9D" opacity="0.7"/>
+      <circle cx="42" cy="34" r="3" fill="#FF6B9D" opacity="0.7"/>
+      <circle cx="25" cy="28" r="2.6" fill="#1B2A4E"/>
+      <circle cx="39" cy="28" r="2.6" fill="#1B2A4E"/>
+      <path d="M23 36 Q32 44 41 36" fill="none" stroke="#1B2A4E" strokeWidth="3" strokeLinecap="round"/>
+    </svg>
+    <div style={{ minWidth: "260px", flex: 1 }}>
+      <p style={{ margin: 0, fontFamily: "Fredoka, Quicksand, system-ui, sans-serif", fontWeight: 700, fontSize: "13px", color: "#E94B7E", letterSpacing: "0.24em", textTransform: "uppercase" }}>The Quiz Book · Season 1</p>
+      <h1 style={{ margin: "8px 0 6px", fontFamily: "Fredoka, Quicksand, system-ui, sans-serif", fontWeight: 700, fontSize: "44px", lineHeight: 1.05, color: "#1B2A4E", textShadow: "4px 4px 0 #FFFFFF" }}>Mia&rsquo;s Quiz Tournament</h1>
+      <p style={{ margin: 0, fontFamily: "Quicksand, system-ui, sans-serif", fontSize: "18px", color: "#1B2A4E", lineHeight: 1.45, maxWidth: "560px" }}>
+        Eleven players, eight weeks of weekly bracket battles, one
+        champion at the end. No passwords, no logins to remember,
+        just an inbox and a few minutes of trivia a week.
+      </p>
+      <div style={{ marginTop: "20px", display: "flex", gap: "12px", flexWrap: "wrap" }}>
+        <a href="/joining" style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "10px 22px", background: "#E94B7E", color: "#FFFFFF", border: "3px solid #1B2A4E", borderRadius: "14px", boxShadow: "4px 4px 0 #1B2A4E", fontFamily: "Fredoka, Quicksand, system-ui, sans-serif", fontWeight: 700, fontSize: "16px", textDecoration: "none" }}>🎟️ Join the tournament</a>
+        <a href="/playing/overview" style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "10px 22px", background: "#FFFFFF", color: "#1B2A4E", border: "3px solid #1B2A4E", borderRadius: "14px", boxShadow: "4px 4px 0 #1B2A4E", fontFamily: "Fredoka, Quicksand, system-ui, sans-serif", fontWeight: 700, fontSize: "16px", textDecoration: "none" }}>🎮 How to play</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+## A quick tour
 
 <CardGroup cols={2}>
-  <Card title="Join the Tournament" icon="ticket" href="/joining">
-    Sign up at /join with just a name and an email. A one-time magic link arrives in your inbox — no password to set, ever.
+  <Card title="Join the tournament" icon="ticket" href="/joining">
+    Sign up at **/join** with just a name and email. A one-time magic
+    link arrives in your inbox — no password to set, ever.
   </Card>
-  <Card title="How to Play" icon="gamepad" href="/playing/overview">
-    Learn how rounds work, how scoring works, and how to survive elimination.
+  <Card title="How to play" icon="gamepad-2" href="/playing/overview">
+    Rounds, scoring, hearts. Everything you need to survive past week
+    one.
   </Card>
-  <Card title="Standings & Bracket" icon="trophy" href="/tournament/standings">
-    Track your rank on the live leaderboard and follow the bracket as it unfolds.
+  <Card title="Standings & bracket" icon="trophy" href="/tournament/standings">
+    Track your rank on the leaderboard and follow the bracket as it
+    narrows down to the four finalists.
   </Card>
-  <Card title="Bracket Predictions" icon="crystal-ball" href="/tournament/predictions">
-    Pick your bracket winners before matches are decided and earn bonus points.
+  <Card title="Bracket predictions" icon="crystal-ball" href="/tournament/predictions">
+    Pick your winners before matches are decided and earn bonus
+    points for calling it right.
   </Card>
 </CardGroup>
 
-## How the tournament works
+## How a season runs
 
 <Steps>
-  <Step title="Sign up">
-    Go to **/join**, enter your name and email, and click the one-time magic link in your inbox. The link signs you in, creates your account, and enrolls you in the tournament.
+  <Step title="Sign up at /join" icon="ticket">
+    Tell us your name and email. We send a one-time magic link to your
+    inbox. Click it once and you&rsquo;re in.
   </Step>
-  <Step title="Sign in next time">
-    Returning? Go to **/signin** and tap **Sign in with MiaAuth**. Auth0 sends you a 6-digit code, you enter it, you're back in. No password ever.
+  <Step title="Sign back in at /signin" icon="key">
+    Returning? Tap **Sign in with MiaAuth** — a 6-digit code lands in
+    your inbox. No password ever.
   </Step>
-  <Step title="Play each round">
-    When a round opens, head to **/play** and answer the quiz questions before time runs out. Each round has a pass threshold — clear it to keep all your hearts.
+  <Step title="Play each round at /play" icon="gamepad-2">
+    A new quiz round drops every week. Answer before the timer ends.
+    Clear the pass threshold and your hearts are safe.
   </Step>
-  <Step title="Survive elimination">
-    You start with a set number of hearts (lives). Miss a round or fail to pass the threshold and you lose a heart. Lose them all and you're out.
+  <Step title="Survive the bracket" icon="medal">
+    You start with two hearts. Miss a round or fail the threshold and
+    you lose one. Lose both and the bracket spits you into the losers&rsquo;
+    side; lose again and you&rsquo;re out.
   </Step>
-  <Step title="Win the prize">
-    The last player standing — or the one with the highest score when the host ends the tournament — is crowned champion and wins the prize!
+  <Step title="The Grand Final" icon="crown">
+    Four finalists. Two bracket finals + a championship. One champion
+    at the end — and an end-credits slide with their name on it.
   </Step>
 </Steps>
 
-<Note>
-  New to the tournament? Start with the [Joining guide](/joining) to get your account set up in less than a minute.
-</Note>
+<MiaSays>
+  New here? Start with the [Joining guide](/joining) — it takes less
+  than a minute, and the magic link does all the work.
+</MiaSays>
+
+## The Grand Final this season
+
+The Grand Final is **pre-taped** for Season 1. Mia and Sam record each
+match one-on-one, edit them together into a watch-anytime video, and
+email the link to every enrolled player. See [The Finals overview](/finals/overview)
+for the four finalists and the format, or jump straight to [How to
+watch](/finals/how-to-watch) for what to expect when the email lands.
+
+## Made with care
+
+<Card title="A note about the people behind this" icon="heart" href="/discourse-forum">
+  Mia (age 8) is the in-app **Author** — she writes the cover lines,
+  picks question topics, and emojis everything. Sam handles the
+  technical wiring, hosts the broadcast, and tries to keep the
+  tournament from falling over. The forum at
+  [discuss.miaswebsites.art](https://discuss.miaswebsites.art) is where
+  the trash-talk + hot takes live.
+</Card>

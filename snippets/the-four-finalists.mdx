@@ -1,0 +1,28 @@
+{/* Reusable: the four-finalist card group.
+
+    Usage:
+      import { FourFinalists } from "/snippets/the-four-finalists.mdx";
+      <FourFinalists />
+*/}
+
+export const FourFinalists = () => (
+  <CardGroup cols={2}>
+    <Card title="Karen" icon="trophy">
+      <strong>Winners&rsquo; bracket finalist.</strong> Three-match winning
+      streak heading into the finals, no losses on the regular-season
+      scoreboard.
+    </Card>
+    <Card title="Marc" icon="trophy">
+      <strong>Winners&rsquo; bracket finalist.</strong> The other side of
+      the headline matchup. Same three-match winning streak, no losses.
+    </Card>
+    <Card title="Grandpa" icon="medal">
+      <strong>Losers&rsquo; bracket finalist.</strong> Lost in the early
+      rounds; ran the comeback all the way to the redemption final.
+    </Card>
+    <Card title="Sam" icon="medal">
+      <strong>Losers&rsquo; bracket finalist.</strong> Also the host of
+      the tournament. Don&rsquo;t ask how he&rsquo;s still in it.
+    </Card>
+  </CardGroup>
+);

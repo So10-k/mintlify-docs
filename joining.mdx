@@ -1,9 +1,21 @@
 ---
 title: "Join Mia's Quiz Tournament: Sign Up at /join"
+sidebarTitle: "Joining"
 description: "Sign up for Mia's Quiz Tournament at /join. Name plus email, a one-time magic link in your inbox, no password to create. Powered by Auth.js."
+icon: "ticket"
 ---
 
+import { MiaSays } from "/snippets/mia-says.mdx";
+
 Signing up for Mia's Quiz Tournament takes less than a minute at **/join**. You give a display name and an email address, click **Send me a magic link**, and a one-time link arrives in your inbox. Click the link and you're enrolled — no password to create, no second form, no account to confirm.
+
+<MiaSays>
+  My favorite part is picking a name. You can use your real one or
+  whatever you want me to call you on the leaderboard — but pick
+  something the rest of the family will know is you, because if
+  &ldquo;HotDog97&rdquo; wins the tournament I&rsquo;m not allowed to
+  tell anyone in real life who that is.
+</MiaSays>
 
 <Note>
   /join is the **new-player door**. It uses a one-time **magic link** sent through Mia's own email pipeline (Resend or Brevo, whichever the host has selected). Returning players can sign in here too, but **/signin** is the faster door for you — it uses the MiaAuth code flow instead. Either page gets you to the same account.
