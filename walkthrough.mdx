@@ -1,4 +1,3 @@
-```mdx
 ---
 title: "🔒 SESSION 001 · Easter Egg Walkthrough"
 description: "Author-only walkthrough for the Mia's Quiz Tournament easter egg puzzle. Password protected."
@@ -16,10 +15,7 @@ import { PasswordGate } from "/snippets/password-gate.mdx";
 
 ## The full puzzle chain
 
-This is the author-only walkthrough. It documents every step of the
-SESSION 001 easter egg so the host (Sam) can verify the puzzle is
-solvable, help anyone who gets stuck, and confirm screenshots that
-get texted in.
+This is the author-only walkthrough. It documents every step of the SESSION 001 easter egg so the host (Sam) can verify the puzzle is solvable, help anyone who gets stuck, and confirm screenshots that get texted in.
 
 **Final access code: `SUNSHINE`** (8 letters · case-insensitive)
 **Hidden URLs:** `/dossier` (puzzle step 2), `/easteregg` (entry point)
@@ -31,57 +27,37 @@ get texted in.
 
 The seed is planted in the [45-second hosts-intro video](https://quiz.miaswebsites.art/easteregg):
 
-- **0–2s · Cold open.** The case folder slams down with a stamp that
-  says **`ACCESS: _ _ _ _ _ _ _ _`** — eight dashes. That tells the
-  viewer the final code is 8 characters.
+- **0–2s · Cold open.** The case folder slams down with a stamp that says **`ACCESS: _ _ _ _ _ _ _ _`** — eight dashes. That tells the viewer the final code is 8 characters.
 
-The eight dashes are the only "this is a puzzle" tell. Everything
-else looks like normal video chrome.
+The eight dashes are the only "this is a puzzle" tell. Everything else looks like normal video chrome.
+
+---
 
 ## Step 2 · Find the URL clue
 
-- **6–10s · DOSSIER REVEAL.** The case folder zooms in tight. A small
-  paper sticker on the spine reads:
-```
+- **6–10s · DOSSIER REVEAL.** The case folder zooms in tight. A small paper sticker on the spine reads: `FILE://miaswebsites.art/dossier`
 
-FILE://miaswebsites.art/dossier
+The sticker is rotated 90° (like a real binder spine label), in Courier monospace, ~18px on a 1920×1080 frame. It's readable but easy to miss in motion. A solver who pauses or rewinds the zoom beat will catch it.
 
-```text
+Direct link for your reference: [quiz.miaswebsites.art/dossier](https://quiz.miaswebsites.art/dossier).
 
-The sticker is rotated 90° (like a real binder spine label), in
-Courier monospace, ~18px on a 1920×1080 frame. It's readable but
-easy to miss in motion. A solver who pauses or rewinds the zoom
-beat will catch it.
-
-Direct link for your reference: <a href="https://quiz.miaswebsites.art/dossier">quiz.miaswebsites.art/dossier</a>.
+---
 
 ## Step 3 · Visit /dossier
 
-The dossier page is styled as an opened manilla case folder with a
-"CLASSIFIED" watermark. The transcript inside is mostly redacted but
-the visible fragments do two things:
+The dossier page is styled as an opened manilla case folder with a "CLASSIFIED" watermark. The transcript inside is mostly redacted but the visible fragments do two things:
 
-1. **Misdirection.** "Hidden in plain sight," "small, yellow,
- friendly," "the daylight fell" — these are vibes-only clues. They
- confirm the theme (mascot, sun) but don't give the answer.
-2. **The shift parameter.** One sentence reads in full:
+**A. Misdirection.** "Hidden in plain sight," "small, yellow, friendly," "the daylight fell" — these are vibes-only clues. They confirm the theme (mascot, sun) but don't give the answer.
 
- > "The code is built like a **cipher**: shifted forward by the
- > same number of **finalists** the broadcast announced. Refer to
- > the **video**. The number is printed in coral."
+**B. The shift parameter.** One sentence reads in full:
 
- That tells them: **the shift number = the number printed in coral
- in the broadcast**. The video has exactly one stat printed in
- coral instead of yellow — **"4 FINALISTS"** at 10–14s. So shift = 4.
+> The code is built like a **cipher**: shifted forward by the same number of **finalists** the broadcast announced. Refer to the **video**. The number is printed in coral.
 
-3. **The cipher itself**, in a dashed box at the bottom of the page:
-```
+That tells them: **the shift number = the number printed in coral in the broadcast**. The video has exactly one stat printed in coral instead of yellow — **"4 FINALISTS"** at 10–14s. So shift = 4.
 
-XLI ERWAIV MW WYRWLMRI
+**C. The cipher itself**, in a dashed box at the bottom of the page: `XLI ERWAIV MW WYRWLMRI` — labeled "CIPHER · CAESAR · SHIFT BACKWARD".
 
-```text
-
-Labeled "CIPHER · CAESAR · SHIFT BACKWARD".
+---
 
 ## Step 4 · Decode the Caesar
 
@@ -114,37 +90,32 @@ Caesar shift backward by 4:
 
 → **`THE ANSWER IS SUNSHINE`**
 
-If a solver tries the wrong shift number, they get gibberish (e.g.,
-shift –3 → `UIF BOTXFS JT TVOTIJOF` is correct only with shift 1,
-illustrating how brittle Caesar is). With shift 4, all words are
-real English. The phrase identifies itself.
+If a solver tries the wrong shift number, they get gibberish. With shift 4, all words are real English — the phrase identifies itself.
+
+---
 
 ## Step 5 · Submit the code
 
-The solver returns to <a href="https://quiz.miaswebsites.art/easteregg">/easteregg</a>
-and enters `SUNSHINE` (case-insensitive, hyphens / spaces stripped).
-The server-side action checks the answer and redirects to a success
-state with:
+The solver returns to [/easteregg](https://quiz.miaswebsites.art/easteregg) and enters `SUNSHINE` (case-insensitive, hyphens / spaces stripped). The server-side action checks the answer and redirects to a success state with:
 
 - A "🌞 Access granted · You found the sunshine" lockup
 - A **SESSION 001 · DECRYPTED** badge
-- A big tappable `sms:2036091555` button — opens the Messages app on
-mobile
-- A unique per-solve **SIG** (timestamp + random 3-char suffix) so
-every successful screenshot is verifiably different
+- A big tappable `sms:2036091555` button — opens the Messages app on mobile
+- A unique per-solve **SIG** (timestamp + random 3-char suffix) so every successful screenshot is verifiably different
+
+---
 
 ## How to verify a screenshot is real
 
 When someone texts you a screenshot, check three things:
 
 1. **SESSION 001 · DECRYPTED** badge present, exact wording.
-2. **SIG line** at the bottom, format `SIG · <base36-timestamp>·<3-uppercase-chars>`.
-The base36 timestamp decodes via `parseInt(part, 36)` and should
-be a recent Unix millisecond timestamp.
-3. **🌞 mascot wink** at the bottom — easy to fake, but the SIG is
-the real proof.
+2. **SIG line** at the bottom, format `SIG · <base36-timestamp>·<3-uppercase-chars>`. The base36 timestamp decodes via `parseInt(part, 36)` and should be a recent Unix millisecond timestamp.
+3. **🌞 mascot wink** at the bottom — easy to fake, but the SIG is the real proof.
 
 If the SIG is missing or malformed, it's a fake.
+
+---
 
 ## What to do if someone gets stuck
 
@@ -152,16 +123,15 @@ The order of partial hints, easiest to hardest:
 
 1. "Did you watch the video on /easteregg?"
 2. "Did you see the eight dashes on the file?"
-3. "There's a URL hidden on the folder — try scrubbing the part
-where it zooms in."
-4. "Once you find the URL, what does the page say about how to
-decode the line at the bottom?"
-5. "The shift is in the video. It's the number printed in coral
-instead of yellow."
+3. "There's a URL hidden on the folder — try scrubbing the part where it zooms in."
+4. "Once you find the URL, what does the page say about how to decode the line at the bottom?"
+5. "The shift is in the video. It's the number printed in coral instead of yellow."
 6. "Caesar cipher, shift backward by 4."
 7. "The answer is the mascot's name. Picture the sun."
 
 After (7), if they still need it, just tell them `SUNSHINE`.
+
+---
 
 ## Implementation references
 
@@ -172,16 +142,14 @@ After (7), if they still need it, just tell them `SUNSHINE`.
 | `app/easteregg/page.tsx` | Renders the entry terminal — video embed + code form + success card. |
 | `app/easteregg/actions.ts` | Server action that normalizes input and redirects to a success URL with a unique SIG. The answer (`SUNSHINE`) lives only here. |
 
+---
+
 ## If you ever want to rotate the puzzle
 
 Change the answer in **three** places (keep them in sync):
 
 1. `app/easteregg/actions.ts` → `const ACCESS_CODE = "..."`
-2. `app/dossier/page.tsx` → encrypt the new plaintext "THE ANSWER IS <NEW>"
-with the new Caesar shift, set as `CIPHER`
-3. The video — if the new shift isn't 4, change which stat is
-printed in coral (or change the dossier text describing how to
-derive the shift)
+2. `app/dossier/page.tsx` → encrypt the new plaintext "THE ANSWER IS <NEW>" with the new Caesar shift, set as `CIPHER`
+3. The video — if the new shift isn't 4, change which stat is printed in coral (or change the dossier text describing how to derive the shift)
 
 </PasswordGate>
-```
