@@ -1,0 +1,65 @@
+---
+title: "How quiz rounds work: playing, scoring, and passing"
+description: "Learn how tournament rounds work — from draft to closed — including how to submit answers, how scoring is calculated, and the pass threshold explained."
+---
+
+Each round of the tournament is a quiz with multiple-choice or true/false questions. The host writes the round, opens it at a set time, and closes it when the window ends. Your job is to play before it closes and answer enough questions correctly to meet the pass threshold.
+
+## Round lifecycle
+
+Every round moves through three states:
+
+- **Draft** — the round has been written but not yet opened. You can't see or play draft rounds.
+- **Active** — the round is open and playable. The current round card on `/play` links directly to it.
+- **Closed** — the round has ended. You can review your answers but can't change them.
+
+<Note>
+  Only one real tournament round can be active at a time. The host opens and closes rounds manually.
+</Note>
+
+## How to play an active round
+
+<Steps>
+  <Step title="Go to /play">
+    The main card on your dashboard shows the active round with its title and a short introduction. Click **Play this round!** to open it.
+  </Step>
+  <Step title="Read the intro">
+    Each round starts with an optional intro passage. Read it carefully — questions are often based on the content it describes.
+  </Step>
+  <Step title="Answer each question">
+    Work through the questions one by one. Each question is either multiple-choice (pick one answer from several options) or true/false.
+  </Step>
+  <Step title="Submit your answers">
+    When you've answered every question, submit. You can only submit once per round, so review your picks before confirming.
+  </Step>
+</Steps>
+
+## Scoring and the pass threshold
+
+Your score is the number of correct answers divided by the total number of questions. For example, if a round has 10 questions and you get 7 right, your score is **70%**.
+
+To pass a round you need to meet the pass threshold, which is set by the host for each round. The default threshold is **60%** — meaning you need to answer at least 60% of questions correctly.
+
+| Your score | Threshold | Result |
+|---|---|---|
+| 70% | 60% | Pass — no heart lost |
+| 50% | 60% | Fail — lose 1 heart |
+| 100% | 60% | Pass — no heart lost |
+
+<Info>
+  The pass threshold can vary from round to round. It's always shown on the round page before you submit.
+</Info>
+
+## After you submit
+
+Once you submit, you're taken directly to your answer review. You can see every question, the option you chose, and whether it was correct. Your final score is shown as a percentage at the top.
+
+You can return to review your answers any time by going to `/play` and clicking the "See your answers" link for a past or the current round.
+
+## If you miss a round
+
+If a round closes before you submit, the system automatically records a score of **0%** for you. A score of 0% doesn't meet any pass threshold, so you lose a heart automatically when the round closes. Missing a round has the same effect as failing one.
+
+<Warning>
+  Don't wait until the last minute. If the round closes while you still have the page open, your answers won't be accepted and you'll receive a score of 0.
+</Warning>

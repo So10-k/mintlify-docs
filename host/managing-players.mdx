@@ -1,0 +1,68 @@
+---
+title: "Managing Players: Hearts, Restoration, and Registration"
+description: "How to open and close registration, give or take hearts, restore eliminated players, and permanently remove someone from the tournament."
+---
+
+The **Players** section of `/host` lists every enrolled participant and gives you fine-grained control over their standing. Mistakes in scoring happen — you can give back a heart, take one away, restore a fully eliminated player, or remove someone from the tournament entirely.
+
+## Opening and closing registration
+
+Sign-up controls appear in the **Tournament** section at the top of `/host`. You can open and close registration at any time, including after the tournament is in progress.
+
+| Button | Effect |
+|---|---|
+| **Open sign-ups** | Opens registration. Players who visit the site can now enroll. |
+| **Close sign-ups** | Closes registration. No new enrollments are accepted. |
+
+<Note>
+Closing sign-ups does not remove any players who are already enrolled. It only prevents new registrations.
+</Note>
+
+## The players list
+
+Each row in the **Players** section shows:
+
+- **Player name** (or email if no name is set)
+- **Hearts** — filled hearts (❤️) for lives remaining, empty hearts (🤍) for strikes used
+- **OUT badge** — shown in red if the player has been eliminated
+
+Players are listed in the order they enrolled (earliest first).
+
+## Player actions
+
+### Give a heart (+❤️)
+
+Pressing **+ ❤️** reduces the player's strike count by 1. If the player had been eliminated because their strike count reached the limit, reducing it below the limit automatically clears their OUT status and brings them back into the tournament.
+
+Use this to correct an unfair elimination, reverse a technical issue, or give a player a second chance.
+
+### Take a heart (−❤️)
+
+Pressing **− ❤️** increases the player's strike count by 1. If this brings their count to or above the tournament's strike limit, they are immediately marked OUT.
+
+### Restore a player (↩️)
+
+The **↩️ Restore** button is only shown for players who are currently marked OUT. Pressing it resets the player's strike count to 0 and clears their eliminated status — a full restoration.
+
+<Tip>
+Use Restore when you want to bring a player back with a clean slate. Use Give heart (+❤️) when you only need to adjust their count by one.
+</Tip>
+
+### Remove a player
+
+The **remove** link permanently deletes the player's enrollment record from the tournament. This action cannot be undone.
+
+<Warning>
+Removing a player is irreversible. Their attempt history, answers, and strike records are deleted along with the enrollment. If you only want to kick someone out of the standings temporarily, use the heart controls instead.
+</Warning>
+
+## Quick reference
+
+| Action | Button | Who it applies to | Effect |
+|---|---|---|---|
+| Open registration | Open sign-ups | Everyone | Allows new enrollments |
+| Close registration | Close sign-ups | Everyone | Blocks new enrollments |
+| Give heart | + ❤️ | Any player | Decreases strike count by 1; may restore from OUT |
+| Take heart | − ❤️ | Any player | Increases strike count by 1; may eliminate |
+| Restore | ↩️ Restore | OUT players only | Resets strike count to 0, clears OUT status |
+| Remove | remove | Any player | Permanently deletes enrollment (cannot undo) |

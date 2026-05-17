@@ -1,0 +1,80 @@
+---
+title: "Bracket Predictions: Pick Match Winners and Earn Points"
+description: "Pick who you think will win each bracket matchup before the results are decided. Earn points for correct calls and compete on the predictions leaderboard."
+---
+
+The bracket predictions game lets you call the winner of every matchup in the tournament bracket before results are decided. The more correct picks you make — and the deeper into the bracket those picks go — the more points you earn. You can compete on a separate predictions leaderboard that tracks everyone's accuracy.
+
+<Warning>
+  Predictions may not be enabled for every tournament. If visiting `/predict` returns a "not found" page, the host has not turned on this feature for the current tournament.
+</Warning>
+
+## Getting started
+
+You must be signed in to make predictions. If you are not signed in, you will be redirected to the sign-in page automatically.
+
+<Steps>
+  <Step title="Open the predictions page">
+    Go to **/predict**. Your current pick count, score so far, and a summary of resolved picks are shown at the top.
+  </Step>
+  <Step title="Launch the bracket walkthrough">
+    Click **Launch experience** (or **Continue picking** if you've already started). This opens the cinematic bracket walkthrough at **/predict/play**, where you step through each matchup one by one and tap the player you think will win.
+  </Step>
+  <Step title="Pick winners round by round">
+    Work through the matchups in order. Once you pick a winner in an earlier round, that player automatically appears as a participant in the next-round slot — you don't need to fill later rounds manually.
+  </Step>
+  <Step title="Review and adjust">
+    After finishing, return to **/predict** to see your full bracket. Tap **Tweak your picks** any time to go back into the walkthrough and change a selection before it locks.
+  </Step>
+</Steps>
+
+## How picks cascade through the bracket
+
+When you pick a winner for a Round 1 matchup, your chosen player automatically fills their side of the Round 2 matchup in your personal bracket view. This cascade continues all the way to the final — your picks propagate forward round by round based on your earlier calls, not on the actual results.
+
+This means you can make predictions for later rounds even before the real matches have been played. Your bracket shows who you believe will be there, not who has actually arrived.
+
+## Scoring
+
+Different matchups are worth different amounts:
+
+| Matchup | Points for a correct pick |
+|---|---|
+| Main bracket — Rounds 1 & 2 | 1 point |
+| Main bracket — Round 3 (semi-final) | 2 points |
+| Main bracket — Round 4 and beyond (final) | 4 points |
+| Losers bracket — any round | 1 point |
+
+Points are awarded as matchups resolve. Your running total and correct-pick count update automatically on the **/predict** page.
+
+## Reading your bracket overlay
+
+The bracket on **/predict** uses colour coding to show the status of each pick at a glance:
+
+- **Coral card with a star (★)** — this is your active pick for that matchup
+- **Green card** — the matchup has resolved and your pick was correct
+- **Struck-through coral card** — the matchup has resolved and your pick lost
+- **Blank slot** — waiting for an upstream matchup to finish before this one can be predicted
+
+## Locking: when you can no longer change a pick
+
+The host can lock individual matchups to prevent further prediction changes — typically just before a round begins. Once a matchup is locked:
+
+- You can no longer change your pick for that matchup.
+- Any picks you have already made for that matchup are saved and will be scored when the result is decided.
+
+Edit your picks before the host locks each matchup. Earlier rounds tend to lock earlier, so make your Round 1 picks as soon as possible.
+
+<Tip>
+  Keep an eye on the pick count at the top of **/predict**. It shows how many matchups you have picked out of the total pickable, so you know if you still have decisions to make.
+</Tip>
+
+## Predictions leaderboard
+
+The predictions leaderboard at **/predict/leaderboard** ranks everyone who has made at least one prediction. Each row shows:
+
+- **Total points** earned from correct picks (primary sort)
+- **Correct picks** out of resolved matchups (tiebreaker)
+- **Total picks made** across all matchups
+
+Your own row is highlighted so you can find your position quickly. The leaderboard link is also available from the top-right of the **/predict** page.

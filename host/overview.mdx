@@ -1,0 +1,69 @@
+---
+title: "Host Panel Overview: Running Mia's Quiz Tournament"
+description: "A complete guide to the /host dashboard — manage the tournament lifecycle, control registration, start and close rounds, and navigate to every host section."
+---
+
+The host panel at `/host` is your command center for running a Mia's Quiz Tournament. It is only accessible to users whose account has the **author** role; anyone else is redirected to the play page. From here you can manage the full tournament lifecycle, control player registration, write and publish rounds, manage the bracket, and navigate to every host sub-section.
+
+## Tournament lifecycle
+
+Every tournament moves through three statuses:
+
+| Status | Meaning |
+|---|---|
+| `registration` | Sign-ups are open or closed, but no round has started yet. |
+| `in_progress` | At least one real round has been started. The tournament automatically transitions here when you press **Start Round 1**. |
+| `complete` | You have ended the tournament. A champion may or may not have been named. |
+
+The status line at the top of the **Tournament** section always shows the current state, for example: "Round 2 active — The Animal Round" or "Between rounds (draft ready)".
+
+## Tournament controls
+
+The controls available to you depend on the current state:
+
+| Control | When it appears | Effect |
+|---|---|---|
+| **Open sign-ups** | Registration is closed | Opens registration; players can now enroll. |
+| **Close sign-ups** | Registration is open | Closes registration; no new enrollments are accepted. |
+| **Start Round N** | No active round, a draft round exists | Opens the next draft round to players and moves the tournament to **In Progress** if it was still in registration. |
+| **Close Round N** | A real round is active | Closes the round, records scores, processes eliminations, and auto-advances the bracket. |
+| **End the tournament** | Tournament is not complete | Closes any active round, marks the tournament complete, and records your chosen champion (or ends with no champion). |
+| **Reopen tournament (undo)** | Tournament is complete | Reopens the tournament, clears the end timestamp and the recorded champion. |
+
+<Warning>
+Removing a player and ending a tournament cannot be undone (except reopening the tournament, which does not restore removed players). Use the Reopen control to recover from an accidental end.
+</Warning>
+
+## Cover line
+
+The **Cover line** section lets you update the subtitle shown on the home page. Type up to 240 characters and press **Save**.
+
+## Sub-pages
+
+The host panel header contains quick-navigation buttons to these sub-pages in the app:
+
+| Sub-page | Path | What it does |
+|---|---|---|
+| Predictions | `/host/predictions` | View and manage player prediction entries for the tournament. |
+| Emails | `/host/email-analytics` | Review delivery stats and logs for announcement and MiaAuth (Auth0) sign-in emails. |
+| Attempts | `/host/attempts` | Inspect every quiz attempt submitted by players across all rounds. |
+| Visitors | `/host/visitors` | See a log of recent visitor activity on public pages. |
+| Blocks | `/host/blocks` | Manage blocked users who are prevented from accessing the tournament. |
+| Files | `/host/files` | Upload and manage files used across the tournament site. |
+
+## What's on this page
+
+The host panel is divided into the following sections, all on a single scrollable page:
+
+- **Tournament** — status line and primary controls (open/close sign-ups, start/close rounds, end/reopen tournament)
+- **Bracket** — generate, shuffle, clear, and manually override the single-elimination bracket
+- **Countdown card** — configure the live countdown clock shown to signed-in players
+- **Email provider** — switch between Resend and Brevo
+- **Site theme** — toggle between Picture-book and Arcade visual themes for public pages
+- **Public pages** — hide or show the bracket, players, and standings pages
+- **Send an announcement** — email all or a subset of enrolled players
+- **Cover line** — edit the subtitle shown on the home page
+- **Rounds** — list of all real tournament rounds with status badges and delete/reopen controls
+- **Practice rounds** — list of always-open warm-up rounds
+- **Write a new round** — the round editor form for drafting rounds
+- **Players** — full player list with heart and restoration controls

@@ -1,0 +1,119 @@
+---
+title: "MiaAuth (Powered by Auth0): How Sign-In Works"
+description: "A host's guide to MiaAuth — the Auth0-backed authentication system used for every sign-up and sign-in in Mia's Quiz Tournament."
+---
+
+**MiaAuth** is the authentication system for Mia's Quiz Tournament. It is **powered by [Auth0](https://auth0.com)** and is the **only** way players and hosts sign in. There are no passwords, no social logins (Google, Apple, etc.), no SSO, and no alternate flows — every session begins with a one-time MiaAuth email link issued by Auth0.
+
+<Note>
+  As a host, you don't need to configure Auth0 yourself. MiaAuth is pre-wired into the tournament site. This page exists so you can confidently explain the flow to players, troubleshoot delivery problems, and understand what Auth0 is doing on your behalf.
+</Note>
+
+## The MiaAuth flow at a glance
+
+```
+Player                Tournament site             MiaAuth (Auth0)              Email provider
+  │                          │                          │                            │
+  │ 1. Enter email at /join  │                          │                            │
+  │─────────────────────────▶│                          │                            │
+  │                          │ 2. Ask Auth0 to issue    │                            │
+  │                          │    a passwordless link   │                            │
+  │                          │─────────────────────────▶│                            │
+  │                          │                          │ 3. Generate one-time link  │
+  │                          │                          │    + hand off to provider  │
+  │                          │                          │───────────────────────────▶│
+  │                          │                          │                            │ 4. Deliver email
+  │◀──────────────────────────────────────────────────────────────────────────────────│
+  │                                                                                  │
+  │ 5. Click "Play now →" in the MiaAuth email                                       │
+  │─────────────────────────────────────────────────────▶│                           │
+  │                                                      │ 6. Verify link, mint     │
+  │                                                      │    Auth0 session token   │
+  │                          │◀─────────────────────────│                           │
+  │ 7. Redirected, signed in │                          │                           │
+  │◀─────────────────────────│                          │                           │
+```
+
+1. **Player submits their email** at `/join` (new players) or `/signin` (returning players).
+2. **The site asks Auth0** to start a [passwordless email](https://auth0.com/docs/authenticate/passwordless) flow for that address.
+3. **Auth0 generates a one-time, signed link** with a short lifetime.
+4. **The email provider** (Resend or Brevo, whichever you've selected) delivers the link in a "Your MiaAuth sign-in link" email.
+5. **The player clicks the link**, which routes through Auth0's verification endpoint.
+6. **Auth0 validates the link** — checks the signature, that it hasn't been used, and that it hasn't expired.
+7. **Auth0 mints a session** and redirects the player into the tournament site at `/play`, fully signed in.
+
+The player never types a password. Auth0 never stores one. The only thing the player needs to do is be able to receive email at the address they signed up with.
+
+## What Auth0 is doing for you
+
+| Concern | How Auth0 handles it |
+|---|---|
+| **Identity** | Each player is uniquely identified by their verified email address. Auth0 holds the canonical user record. |
+| **Link issuance** | Auth0 generates a cryptographically signed, single-use token per request. |
+| **Link expiry** | Every MiaAuth link expires **24 hours** after it is issued, even if never clicked. |
+| **Replay protection** | Once a link is clicked (successfully or not), it is invalidated. A second click returns an "expired or already used" error. |
+| **Session management** | After a successful click, Auth0 issues a session that keeps the player signed in across visits until they sign out or the session naturally expires. |
+| **Account takeover protection** | Because sign-in requires inbox access, anyone who controls the email address controls the account — there is no separate password to leak. |
+| **Email verification** | Sign-in is itself the verification. A player cannot complete sign-up without proving they can read mail at the address they entered. |
+
+## What MiaAuth adds on top
+
+MiaAuth wraps the Auth0 passwordless flow with tournament-specific behavior:
+
+- **Branded subject and styling.** The email is titled "Your MiaAuth sign-in link" and uses the picture-book stationery, regardless of the active site theme.
+- **Unified `/join` and `/signin`.** Both pages use the same MiaAuth back end. `/join` collects a display name for new players; `/signin` only needs the email. Either page accepts a returning player.
+- **Provider routing.** The actual delivery of the Auth0-generated email goes through whichever provider you've selected on `/host` (**Resend** or **Brevo**). Switching providers does not change the MiaAuth flow itself — only who sends the message.
+- **Enrollment hook.** When a brand-new email successfully completes sign-in, the site creates the tournament enrollment record (name, starting hearts, etc.). Auth0 only owns the identity; the tournament owns the gameplay record.
+
+## What players see
+
+When a player signs in, they go through exactly two screens:
+
+1. **Form** — `/join` or `/signin` with the email field.
+2. **Check your inbox!** — a confirmation page telling them to open the email.
+
+The email itself contains a single **Play now →** button. Pressing it sends them to Auth0, then immediately on to `/play`. Players never see an Auth0-branded screen in normal flows; the redirect is too fast to perceive.
+
+<Tip>
+  If a player asks "why didn't I get a password?" — the answer is **MiaAuth (powered by Auth0) is the only sign-in method**. The tournament site doesn't have a password field anywhere because no password exists.
+</Tip>
+
+## Troubleshooting MiaAuth issues
+
+Use this table when a player reports a sign-in problem.
+
+| Symptom | Likely cause | What to do |
+|---|---|---|
+| "I never got the email" | The provider's message is delayed, in spam, or blocked by the player's mail server. | Have them check spam/junk and add the sender to their address book. If the issue persists, check `/host/email-analytics` for the delivery status. |
+| "The link says it's expired" | The link is older than 24 hours, or has already been clicked. | Send them to `/signin` to request a fresh link. Each new request invalidates older ones. |
+| "I'm signed in as the wrong account" | They previously signed in with a different email on this browser. | Have them sign out from the app menu, then re-request a MiaAuth link with the correct email. |
+| "The link opened on a different device and didn't work" | Some mail apps preview links from a different IP, which can trip Auth0's safety checks. | Ask them to copy the link and paste it into the browser on the device they want to sign in on, ideally the same device they signed up from. |
+| "I changed my email — can I keep my account?" | Auth0 keys the identity to the email address. | The tournament does not currently support email changes. Have them sign up fresh, then contact you to merge their progress manually via the **Players** section. |
+
+<Warning>
+  If multiple players from the same domain report missing emails, it is almost always a delivery problem at their mail server (greylisting, aggressive filtering) — not an Auth0 outage. Check `/host/email-analytics` to confirm the message was accepted by the provider, and consider switching email provider from the **Email provider** section on `/host` if the issue is widespread.
+</Warning>
+
+## What MiaAuth does **not** do
+
+To set expectations clearly:
+
+- **No passwords.** There is nothing to reset, nothing to leak, nothing for a player to forget beyond their own email address.
+- **No social sign-in.** "Sign in with Google" / "Sign in with Apple" buttons are not available, even though Auth0 supports them. MiaAuth is intentionally email-only.
+- **No SSO or enterprise connections.** This is a kids' quiz tournament, not an enterprise app.
+- **No account deletion self-service.** If a player wants their data removed, use the **remove** action in the host **Players** section (see [Managing Players](/host/managing-players)).
+- **No host bypass.** Hosts sign in with MiaAuth the same way players do. The **author** role that unlocks `/host` is attached to your tournament account, not to your Auth0 identity directly — so signing in with a different email puts you in player mode.
+
+## Quick reference
+
+| Property | Value |
+|---|---|
+| Provider | **Auth0** (passwordless email connection) |
+| Branded as | **MiaAuth** |
+| Methods supported | Email one-time link only |
+| Link lifetime | 24 hours |
+| Link reuse | One-time; invalidated on first click |
+| Password required | Never |
+| Social logins | Not supported |
+| Email delivery | Resend or Brevo (selectable on `/host`) |
+| Where to view delivery logs | `/host/email-analytics` |

@@ -1,0 +1,103 @@
+---
+title: "Bracket Controls: Generate, Override, and End Tournament"
+description: "Generate, shuffle, and override the single-elimination bracket, manage the losers bracket, swap seeds, and end or reopen the tournament."
+---
+
+The **Bracket** section of `/host` gives you full control over the single-elimination bracket. You can generate it from the current player list, reseed it at any time, manually override any matchup result, and end the tournament by picking a champion. A public view of the bracket is available at `/bracket`.
+
+## Generating the bracket
+
+Before you can generate a bracket, at least 2 players must be enrolled. Two seeding options are available:
+
+| Button | Seeding order |
+|---|---|
+| **Generate bracket** / **Re-seed by sign-up order** | Seeds players in the order they enrolled (earliest registrant = seed 1). |
+| **Shuffle bracket** | Randomizes the seed order each time you press it. |
+
+Pressing either button wipes any existing bracket data and rebuilds from scratch. The bracket is single-elimination: the top seed receives a bye in round 1 when there is an odd number of players.
+
+<Warning>
+Generating or reshuffling the bracket clears all existing matchup results, including any manual overrides. Only do this before rounds have been played, or be prepared to re-enter results.
+</Warning>
+
+### Clearing the bracket
+
+Press **Clear bracket** to remove all bracket data entirely. This is useful if you want to start over or postpone bracket play. The button only appears when a bracket exists.
+
+## How auto-resolve works
+
+When you close a real tournament round, the bracket automatically advances winners based on quiz scores:
+
+- For each matchup in the bracket round that matches the closed quiz round, the player with the **higher score** is set as the winner.
+- **Tied scores** are left undecided — you must set the winner manually.
+- Once a winner is set for a matchup, the winner is propagated forward into the next round's slot automatically.
+- Matchups you have already resolved **manually** are never overwritten by auto-resolve.
+
+<Info>
+The bracket round index corresponds to the quiz round's chapter number. Closing quiz round 1 resolves bracket round 1 matchups; closing round 2 resolves bracket round 2, and so on.
+</Info>
+
+## Overriding a matchup result
+
+Every matchup in the bracket display has a dropdown and a **set** button. To override a result:
+
+1. Find the matchup in the bracket.
+2. Select the player you want to declare the winner from the dropdown.
+3. Press **set**.
+
+The winner is recorded as a manual override and propagates forward into subsequent rounds immediately. Selecting the blank option (—) clears a previously set result and unwinds any downstream slots that were filled by that result.
+
+<Note>
+Manual overrides are never overwritten by auto-resolve. If you need auto-resolve to take over again, clear the result by selecting — and allow the bracket to re-run when the next round closes.
+</Note>
+
+## Swapping round-1 seeds
+
+The **Adjust round-1 seeds** section appears below the bracket when a bracket exists. It lists every round-1 matchup and lets you change which player occupies each seat.
+
+To swap a seat:
+
+1. Find the matchup row (labeled M1, M2, etc.).
+2. Select a different player from the dropdown next to side A or side B.
+3. Press **swap**.
+
+Swapping a seat clears the winner for that matchup and unwinds any downstream results that depended on it. The bracket then re-propagates byes and any unaffected results.
+
+## The losers bracket
+
+If any main-bracket round-1 matchups have been resolved, a **Losers bracket** section appears automatically beneath the main bracket. Players who lose in main-bracket round 1 are seeded into the losers bracket; one further loss in the losers bracket eliminates them.
+
+- The losers bracket is populated automatically from main round-1 results — you do not need to create it manually.
+- Matchup overrides work the same way as in the main bracket.
+- Auto-resolve also covers losers-bracket matchups when a quiz round closes.
+
+## Ending the tournament
+
+When you are ready to conclude the tournament, expand the **End the tournament…** section in the **Tournament** controls.
+
+<Steps>
+  <Step title="Close any active round (optional)">
+    If a round is currently active, the end action closes it automatically before marking the tournament complete. You can also close it manually first if you want to review results beforehand.
+  </Step>
+  <Step title="Pick a champion">
+    Select any player from the dropdown. You can pick any enrolled player, including someone who was previously eliminated. Their name is recorded as the tournament champion.
+  </Step>
+  <Step title="End with no champion (optional)">
+    Check **End with no champion (just close it)** if you want to close the tournament without naming a winner.
+  </Step>
+  <Step title="Press End tournament">
+    Press the **End tournament** button. The tournament status changes to `complete`, the end timestamp is recorded, and the panel shows the Reopen button in place of the end form.
+  </Step>
+</Steps>
+
+## Reopening a tournament
+
+If you ended the tournament by mistake, or need to continue after an accidental end, press **Reopen tournament (undo)**.
+
+This action:
+
+- Sets the tournament status back to `in_progress`
+- Clears the end timestamp
+- Clears the recorded champion
+
+It does not reverse any strikes, eliminations, or round closures that occurred before the tournament was ended. Use the heart controls in the **Players** section to manually correct player standing if needed.

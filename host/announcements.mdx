@@ -1,0 +1,101 @@
+---
+title: "Sending Email Announcements and the Countdown Card"
+description: "Email your players directly from the host panel — pick an audience, write your message, review the recipient list, and send in a few clicks."
+---
+
+The host panel gives you two ways to keep players informed: a bulk email tool for announcements and a countdown card that shows a live ticking clock on the home and play pages. Both are available from the main host panel at `/host`.
+
+## Sending an announcement
+
+The **Send an announcement** section is at the bottom of the host panel. It uses an audience selector so you can target the right people without maintaining separate lists.
+
+### Audience options
+
+The dropdown offers the following audience modes:
+
+| Mode | Who receives it |
+|---|---|
+| Players still in the tournament | Everyone whose enrollment is not yet eliminated |
+| Players eliminated (any round) | Everyone who has been knocked out |
+| All signed-up players | Every enrolled player regardless of status |
+| Eliminated in a specific round | Players eliminated in the round you select |
+| Players who passed a specific round | Players who submitted a passing attempt in the chosen round |
+| Enrolled but didn't submit a specific round | Players who were enrolled but never submitted for that round |
+| Players with an exact strike count | Players whose recorded strike count matches the number you enter |
+| Hand-picked players | A checklist of individual enrolled players |
+| Every user (all accounts) | All registered accounts, not just enrolled tournament players — use with care |
+
+For round-scoped modes, a second dropdown appears so you can select the specific round. For "Hand-picked players", a searchable checklist of enrolled players appears, with buttons to pre-select subsets (still in, eliminated, all).
+
+A live recipient count updates as you make changes. The first five email addresses (masked) are shown so you can sanity-check who matches before sending.
+
+### Merge variables
+
+You can personalise any field — subject line, message body, or template fields — using merge variables. Each recipient gets their own values substituted at send time.
+
+| Token | Substitutes to |
+|---|---|
+| `{name}` | Player's full display name, or email handle if no name is set |
+| `{firstName}` | First word of the display name |
+| `{email}` | Their email address |
+
+Example: `Hey {firstName}, round 2 is live!` becomes `Hey Marc, round 2 is live!` for Marc.
+
+### Email format
+
+The **Format** dropdown lets you choose between plain text and a set of pre-built templates:
+
+- **Plain text (default)** — Your typed message, sent with the standard sky-card picture-book stationery. URLs in the message are automatically linkified.
+- **Schedule shift · public re-send** — Apology and corrected schedule card.
+- **Bracket update · with live snapshot** — Your message plus a live bracket image that refreshes when recipients open the email.
+- **Still in · congrats with bracket** — Personal congrats note for a player who survived the round, with a live bracket image.
+- **Eliminated · gentle reveal** — Round recap that gently breaks elimination news near the end.
+- **Time is running out · live countdown** — A live-updating countdown clock rendered at open time, with your message and a play button.
+- **Tiebreaker · 5 questions, winner advances** — Sent to two players who tied, with a link to a tiebreaker quiz.
+
+When you select a template, its fields appear for you to fill in. A **Show preview** button renders the email in an iframe so you can see exactly what recipients will receive.
+
+All emails are sent from **Mia's Quiz Tournament** using the same picture-book styling as the MiaAuth (Auth0) sign-in emails.
+
+### How to send an announcement
+
+<Steps>
+  <Step title="Pick an audience">
+    Open the Audience dropdown and select the group you want to reach. If the mode requires a round, select it in the secondary dropdown. Check the recipient count shown below the selector.
+  </Step>
+  <Step title="Choose a format">
+    Leave **Plain text** selected to write a free-form message, or pick a template from the Format dropdown. Templates show their fields and a preview option.
+  </Step>
+  <Step title="Write your subject and message">
+    Enter a subject line (up to 140 characters). For plain text, write your message in the Message box. For templates, fill in the template fields. Use `{firstName}`, `{name}`, or `{email}` anywhere to personalise per recipient.
+  </Step>
+  <Step title="Review and send">
+    Click **Review & send**. A confirmation card appears showing the subject, recipient count, and audience label. Click **Yes, send it** to dispatch. A green result banner confirms how many emails were sent.
+  </Step>
+</Steps>
+
+<Warning>
+  The "Every user" audience targets every registered account, not just enrolled tournament players. Double-check the recipient count before sending when using this mode.
+</Warning>
+
+## The countdown card
+
+The **Countdown card** section (above the announcements section on the host panel) lets you put a live ticking clock at the top of the home page (`/`) and the play page (`/play`) for all signed-in visitors.
+
+The card has three fields:
+
+- **Label** — A short phrase shown above the digits, such as "Round 2 starts in". Up to 80 characters.
+- **Target (your local time)** — A date and time picker. The countdown runs down to this moment.
+- **Visible to players** — Checkbox. Tick to show the card; untick to hide it without losing the label and target values.
+
+Click **Save countdown** to apply. The current state (showing or hidden, and the target datetime) is shown below the form.
+
+<Note>
+  The countdown card is only visible to signed-in users. Signed-out visitors do not see it.
+</Note>
+
+## Email provider
+
+Announcements and MiaAuth (Auth0) sign-in emails both go through the same provider — either **Resend** or **Brevo**. You can switch between them from the **Email provider** section on the host panel if you are approaching one provider's sending limits. The switch takes effect within approximately 30 seconds.
+
+To review delivery results and open rates, go to **Emails** (`/host/email-analytics`) from the host panel navigation links.

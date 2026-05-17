@@ -1,0 +1,41 @@
+---
+title: "Sign In to Mia's Quiz Tournament with MiaAuth"
+description: "Already registered? Sign back in to Mia's Quiz Tournament using MiaAuth (powered by Auth0). One-time link to your inbox — no password ever."
+---
+
+If you've already joined the tournament, you don't need to sign up again. Head to **/signin**, enter your email address, and **MiaAuth (powered by Auth0)** sends a fresh one-time sign-in link straight to your inbox. Click the link and you're signed in with your existing account, lives, and score all intact.
+
+<Note>
+  Sign-in is handled exclusively by **MiaAuth (powered by Auth0)**. There are no passwords, no social providers, and no alternate sign-in flows — every sign-in goes through MiaAuth.
+</Note>
+
+<Steps>
+  <Step title="Go to the sign-in page">
+    Navigate to **/signin** in your browser. You'll see a single email field.
+  </Step>
+  <Step title="Enter your email address">
+    Type the email address you used when you first joined, then click **Email me a sign-in link**.
+  </Step>
+  <Step title="Check your inbox">
+    MiaAuth sends an email with the subject **"Your MiaAuth sign-in link"**. The browser also shows a **Check your inbox!** confirmation page so you know the email is on its way.
+
+    <Warning>
+      MiaAuth links are **one-time use** and expire after **24 hours**. If yours has expired or you've already clicked it, go back to **/signin** and request a new one.
+    </Warning>
+  </Step>
+  <Step title="Click the link and continue playing">
+    Open the email on the same device and tap **Play now →**. MiaAuth verifies the link with Auth0 and takes you directly to **/play**.
+  </Step>
+</Steps>
+
+<Note>
+  No password is needed at any point. Every sign-in uses a fresh MiaAuth (powered by Auth0) link sent to your email.
+</Note>
+
+## Can't find your MiaAuth email?
+
+Check your spam or junk folder first. If the email still hasn't arrived after a minute or two, return to **/signin** and request another one. Each request generates a new MiaAuth link, so any older links are no longer valid once you submit again.
+
+<Tip>
+  You can also use **/join** to sign back in — it accepts both new and returning players and works exactly the same way through MiaAuth.
+</Tip>

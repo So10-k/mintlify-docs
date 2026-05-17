@@ -1,0 +1,56 @@
+---
+title: "Bracket Predictions Settings: Enable, Prize, and Locks"
+description: "Enable or disable the predictions game, set a prize, lock individual matchups so players can't change their picks, and view the predictions leaderboard."
+---
+
+The predictions game lets signed-in users pick winners for every bracket matchup before they are played — like a March Madness bracket challenge. When enabled, a **Predict** link appears in the navigation and players can visit `/predict` to make and update their picks. Managing the game is done from the **Prediction game** page at `/host/predictions`, linked from the top of the host panel.
+
+## Enabling and disabling the game
+
+The **Settings** section at the top of `/host/predictions` has a single checkbox: **Enabled (visible to all signed-in users)**.
+
+- **Checked** — `/predict` is accessible to all signed-in users and the Predict link appears in the nav.
+- **Unchecked** — `/predict` returns a 404 for non-authors and the nav link is hidden. As the host (author), you can still open the page directly via its URL.
+
+Click **Save settings** after making any change to this section.
+
+## Setting a prize
+
+The **Prize description** field (also in the Settings section) lets you display a prize or incentive on the `/predict` page. Enter a short description, for example: `Best predictor wins a custom Mia drawing`. Leave it blank if there is no prize. The field accepts up to 240 characters.
+
+Click **Save settings** to apply.
+
+## Locking matchups
+
+The **Lock controls** section lists every matchup in the tournament. Locking a matchup prevents players from making new predictions or changing existing ones for that matchup.
+
+- **Lock a single matchup** — Click the **Lock** button next to any unseated-but-undecided matchup. Click **Unlock** to reopen it.
+- **Lock all undecided matchups at once** — Click **Lock all undecided** at the top of the section.
+- **Unlock all matchups** — Click **Unlock all**.
+
+Each matchup row shows the bracket type (main or losers), round and slot, the two players, the point value for a correct pick, and the current status:
+
+- A matchup that has already resolved shows a green "winner" badge — it is automatically locked and cannot be unlocked.
+- A matchup where both sides are not yet seated shows "awaiting" — it cannot be locked until the players are known.
+- An undecided, seated matchup shows the Lock / Unlock button.
+
+<Note>
+  A matchup locks automatically the moment a winner is recorded, regardless of your manual lock settings. You do not need to lock resolved matchups yourself.
+</Note>
+
+<Warning>
+  Locking a matchup is immediate. Players who have not yet made a pick for that matchup will not be able to do so once it is locked. Unlock it if you need to reopen picking.
+</Warning>
+
+## Viewing the leaderboard
+
+The **Leaderboard** section at the bottom of `/host/predictions` shows how every participant is scoring. Each row displays:
+
+- Their rank and display name
+- Correct picks out of resolved matchups (e.g. `4/6 correct`)
+- Total predictions made
+- Total points earned
+
+Points are weighted by round: main bracket Round 1 and Round 2 matchups are worth 1 point each, semi-finals are worth 2 points, and the final and any later rounds are worth 4 points. Losers bracket matchups are worth 1 point each.
+
+The public predictions leaderboard is at `/predict/leaderboard`. Players can view it there; the version on `/host/predictions` is the same data displayed for your reference.

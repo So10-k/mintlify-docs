@@ -1,0 +1,92 @@
+{
+  "projectType": "saas",
+  "projectName": "Mia's Quiz Tournament",
+  "projectDescription": "A fun, kid-hosted online quiz tournament where players sign up with a magic link, answer weekly quiz rounds to survive elimination, and compete for the top spot on the leaderboard.",
+  "theme": "almond",
+  "primaryColor": "#FF6B6B",
+  "lightColor": "#FFF7ED",
+  "darkColor": "#1A1A2E",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Player Guide",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "joining",
+              "signing-in"
+            ]
+          },
+          {
+            "group": "Playing",
+            "pages": [
+              "playing/overview",
+              "playing/rounds",
+              "playing/lives-and-elimination",
+              "playing/practice"
+            ]
+          },
+          {
+            "group": "Tournament",
+            "pages": [
+              "tournament/standings",
+              "tournament/bracket",
+              "tournament/predictions"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Host Guide",
+        "groups": [
+          {
+            "group": "Running a Tournament",
+            "pages": [
+              "host/overview",
+              "host/managing-rounds",
+              "host/managing-players",
+              "host/bracket-controls"
+            ]
+          },
+          {
+            "group": "Settings",
+            "pages": [
+              "host/announcements",
+              "host/site-theme",
+              "host/predictions-settings"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Magic-link email sign-in — no passwords needed",
+    "Weekly quiz rounds with multiple-choice and true/false questions",
+    "Strike-based elimination system (hearts/lives)",
+    "Live standings leaderboard ranked by cumulative score",
+    "Single-elimination bracket with optional losers bracket",
+    "Bracket predictions game with points scoring",
+    "Practice rounds that don't affect standings",
+    "Countdown card for upcoming rounds",
+    "Two visual themes: Picture-book and Arcade (neon)",
+    "Host panel with full tournament management controls",
+    "Email announcements to all enrolled players"
+  ],
+  "publicApiSurface": [
+    "GET / — Home page with tournament status and CTA",
+    "GET /join — Registration page (magic-link sign-up)",
+    "GET /signin — Sign-in page for returning players",
+    "GET /play — Player dashboard with active/past rounds",
+    "GET /play/round/[n] — Play or review a specific round",
+    "GET /play/practice/[id] — Practice round attempt",
+    "GET /standings — Live or final leaderboard",
+    "GET /bracket — Public bracket view",
+    "GET /players — Player cards listing",
+    "GET /predict — Bracket predictions for signed-in players",
+    "GET /predict/leaderboard — Predictions leaderboard",
+    "GET /host — Host panel (author role only)"
+  ]
+}

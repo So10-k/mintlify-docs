@@ -1,0 +1,47 @@
+---
+title: "Choosing a Visual Theme: Picture-book or Arcade Mode"
+description: "Choose between the Picture-book and Arcade visual themes for your public bracket, players, and standings pages — changes go live within about 30 seconds."
+---
+
+Mia's Quiz Tournament has two visual themes for its public-facing pages. You can switch between them at any time from the host panel, and the change rolls out to visitors within about 30 seconds.
+
+## The two themes
+
+### Picture-book (default)
+
+The original look for the site — bright sky-blue backgrounds, warm sun yellows, chunky navy borders, and the Fredoka/Quicksand typeface pairing. It is the default and is on by default when you first set up the tournament.
+
+### Arcade (neon)
+
+A dark mode inspired by the Supercell store aesthetic. It features dark backgrounds, neon glow effects, rarity-style badges, and a holographic title treatment. This theme swaps the sunny palette for a high-contrast, game-night feel.
+
+## Which pages are affected
+
+The theme setting applies only to the three public pages:
+
+- `/bracket` — the tournament bracket
+- `/players` — the players list
+- `/standings` — the standings table
+
+The host panel (`/host`), the play page (`/play`), sign-in, and all other pages are not affected by this setting.
+
+<Note>
+  The theme does not change the email styling. Announcement and MiaAuth (Auth0) sign-in emails always use the picture-book stationery regardless of which theme is active.
+</Note>
+
+## How to switch themes
+
+1. Go to the host panel at `/host`.
+2. Scroll to the **Site theme** section.
+3. Click **Picture-book (default)** or **Arcade (neon)** — the currently active theme button is highlighted.
+4. The change saves immediately. Public pages pick it up within approximately 30 seconds as the cache expires.
+
+The current theme is shown below the buttons: either "Picture-book" or "Arcade (neon)".
+
+<Warning>
+  There is a cache delay of up to 30 seconds before the change is visible to players on the public pages. If you need to confirm the change has taken effect, wait a moment and then reload `/bracket`, `/players`, or `/standings`.
+</Warning>
+
+<Tip>
+  **Picture-book** suits a casual, family-friendly or school tournament where you want a warm, approachable look. **Arcade** works well if your players are gamers or if you want a more dramatic, high-stakes atmosphere — for example, a late-stage playoff or a night-time live event.
+</Tip>

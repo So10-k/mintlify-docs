@@ -1,0 +1,74 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "Mia's Quiz Tournament",
+  "theme": "almond",
+  "colors": {
+    "primary": "#FF6B6B",
+    "light": "#FFF7ED",
+    "dark": "#1A1A2E"
+  },
+  "navbar": {
+    "primary": {
+      "type": "github",
+      "href": "https://github.com/So10-k/mias-quiz-tournament"
+    }
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Player Guide",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "joining",
+              "signing-in"
+            ]
+          },
+          {
+            "group": "Playing",
+            "pages": [
+              "playing/overview",
+              "playing/rounds",
+              "playing/lives-and-elimination",
+              "playing/practice"
+            ]
+          },
+          {
+            "group": "Tournament",
+            "pages": [
+              "tournament/standings",
+              "tournament/bracket",
+              "tournament/predictions"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Host Guide",
+        "groups": [
+          {
+            "group": "Running a Tournament",
+            "pages": [
+              "host/overview",
+              "host/managing-rounds",
+              "host/managing-players",
+              "host/bracket-controls"
+            ]
+          },
+          {
+            "group": "Settings",
+            "pages": [
+              "host/announcements",
+              "host/site-theme",
+              "host/predictions-settings",
+              "host/miaauth"
+            ]
+          }
+        ],
+        "hidden": true
+      }
+    ]
+  }
+}

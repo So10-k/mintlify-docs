@@ -1,0 +1,114 @@
+---
+title: "Creating and Managing Quiz Rounds in Your Tournament"
+description: "How to write, start, close, and reopen tournament rounds — including practice rounds, pass thresholds, and the full round lifecycle from draft to closed."
+---
+
+Rounds are the quizzes that players compete in. Every round you write starts as a **draft** that only you can see. You decide when to release it by pressing **Start Round N**, and you decide when to close it by pressing **Close Round N**. Only one real round can be active at a time.
+
+## Round lifecycle
+
+```
+draft  →  active  →  closed
+```
+
+| Status | Visible to players | Accepts submissions | Can be deleted | Can be reopened |
+|---|---|---|---|---|
+| `draft` | No | No | Yes | — |
+| `active` | Yes | Yes | No | No |
+| `closed` | Yes (results shown) | No | No | Yes |
+
+<Note>
+Practice rounds skip this lifecycle — they go straight to `active` when you save them and stay open until you delete them.
+</Note>
+
+## Writing a round
+
+The **Write a new round** section at the bottom of `/host` contains the round editor form. Fill in all required fields and press **Save round** to create a draft.
+
+### Round fields
+
+| Field | Required | Notes |
+|---|---|---|
+| **Practice round** toggle | No | When checked, the round is always open, never awards strikes, and does not feed the bracket. |
+| **Round title** | Yes | Up to 120 characters. Shown to players when the round is active. |
+| **A little intro** | No | Up to 800 characters of prose shown above the questions. Use it to set the scene or give context. |
+| **Pass score** | Yes | A percentage slider, default 60%. Players who score below this threshold lose a heart. |
+| **Closes at** | No | An optional date/time after which submissions are no longer accepted. If left blank, the round stays open until you press **Close Round N**. |
+
+### Questions
+
+Each round needs at least one question. Every question has:
+
+- A **prompt** (up to 400 characters)
+- Between 2 and 6 **answer options** (up to 200 characters each)
+- Exactly one option marked as correct — tap the circle next to the answer to mark it
+
+<Tip>
+You can add up to 6 answer options per question and remove extras down to a minimum of 2. Questions can also be saved to the question library for reuse across future rounds.
+</Tip>
+
+## Create and publish a round
+
+<Steps>
+  <Step title="Open the round editor">
+    Scroll to the **Write a new round** section at the bottom of `/host`.
+  </Step>
+  <Step title="Set the round type">
+    Leave the **Practice round** toggle unchecked for a real tournament round. Check it only if you want an unscored warm-up.
+  </Step>
+  <Step title="Enter the round title and optional intro">
+    Give the round a clear title (for example, "The Animal Round"). Optionally write a short intro paragraph that players see before the questions.
+  </Step>
+  <Step title="Set the pass score">
+    Drag the **Pass score** slider to the percentage players must reach to keep their heart. The default is 60%.
+  </Step>
+  <Step title="Add questions">
+    For each question, type the prompt, fill in at least two answer options, and click the circle next to the correct answer to mark it green. Press **+ Add another question** to add more.
+  </Step>
+  <Step title="Save the round">
+    Press **Save round**. The round is saved as a draft and appears in the **Rounds** list with a `draft` badge. Players cannot see it yet.
+  </Step>
+  <Step title="Start the round when ready">
+    When you are ready to open the round to players, press **Start Round N** in the **Tournament** section. The round moves to `active`, players can now submit answers, and the tournament status changes to `in_progress` if it was still in registration.
+  </Step>
+  <Step title="Close the round">
+    Press **Close Round N** to end submissions. Scores are recorded, strikes are applied to players who failed or did not submit, eliminations are processed, and the bracket auto-advances winners by score.
+  </Step>
+</Steps>
+
+## Pass threshold and what it means
+
+The pass score you set determines who loses a heart when a round closes:
+
+- A player who scores **at or above** the threshold passes. No heart lost.
+- A player who scores **below** the threshold fails and loses one heart (gains one strike).
+- A player who **did not submit** before the round closed is automatically given a score of 0 and loses a heart.
+
+Once a player's strike count reaches the tournament's strike limit, they are marked **OUT**.
+
+<Info>
+The strike limit is set at the tournament level (default: 2 strikes = out). You can adjust individual players' heart counts manually from the **Players** section.
+</Info>
+
+## Practice rounds
+
+Practice rounds are warm-up quizzes that are always open to players. To create one, check the **Practice round** toggle in the round editor before saving.
+
+Key differences from real rounds:
+
+- Go straight to `active` on save — no need to press Start.
+- Never award strikes or cause eliminations.
+- Do not feed the bracket.
+- Eliminated players can take practice rounds.
+- You can delete a practice round draft; active practice rounds can also be deleted from the **Practice rounds** list.
+
+## Managing existing rounds
+
+From the **Rounds** list on `/host`:
+
+- **Delete** — available for `draft` rounds only. Permanently removes the round and its questions. This cannot be undone.
+- **Reopen** — available for `closed` rounds. Sets the round back to `active` so players can submit again. You must close any currently active round before reopening a different one.
+
+<Warning>
+Reopening a closed round does not reverse any strikes or eliminations that were applied when it was first closed. Use the heart controls in the **Players** section to manually correct player standing if needed.
+</Warning>
