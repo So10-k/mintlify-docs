@@ -1,13 +1,12 @@
-{/* Client-side password gate for a Mintlify MDX page. The page's
-    children are hidden until the visitor types the correct password.
-    We never ship the password in plaintext — only its SHA-256 hash.
-    The host page is also `hidden: true` in docs.json / not linked
-    from navigation so it stays unindexed.
-
-    Usage in any page:
-      import { PasswordGate } from "/snippets/password-gate.mdx";
-      <PasswordGate hash="abc...">secret content</PasswordGate>
-*/}
+// Client-side password gate component. Hides children until the
+// visitor types the correct password. Password is checked via SHA-256
+// so the plaintext doesn't ship in the bundle.
+//
+// Usage in any .mdx page:
+//   import { PasswordGate } from "/snippets/password-gate.jsx";
+//   <PasswordGate hash="abc..." hint="optional hint">
+//     secret content
+//   </PasswordGate>
 
 import { useEffect, useState } from "react";
 
@@ -19,9 +18,9 @@ export const PasswordGate = ({ hash, children, hint }) => {
   useEffect(() => {
     if (typeof window === "undefined") return;
     try {
-      const cached = window.localStorage.getItem(`pw-gate:${hash}`);
+      const cached = window.localStorage.getItem("pw-gate:" + hash);
       if (cached === "1") setUnlocked(true);
-    } catch {}
+    } catch (_) {}
   }, [hash]);
 
   async function sha256(s) {
@@ -40,14 +39,18 @@ export const PasswordGate = ({ hash, children, hint }) => {
     if (got === hash) {
       setUnlocked(true);
       try {
-        window.localStorage.setItem(`pw-gate:${hash}`, "1");
-      } catch {}
+        window.localStorage.setItem("pw-gate:" + hash, "1");
+      } catch (_) {}
     } else {
-      setError(`Not it — try again. (${normalized.length} chars submitted)`);
+      setError(
+        "Not it — try again. (" + normalized.length + " chars submitted)"
+      );
     }
   }
 
-  if (unlocked) return <>{children}</>;
+  if (unlocked) {
+    return children;
+  }
 
   return (
     <div
