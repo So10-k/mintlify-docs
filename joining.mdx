@@ -1,50 +1,74 @@
 ---
-title: "Join Mia's Quiz Tournament: Sign Up with MiaAuth"
-description: "Learn how to sign up for Mia's Quiz Tournament using MiaAuth (powered by Auth0). Only your name and email — no password to manage."
+title: "Join Mia's Quiz Tournament: Sign Up at /join"
+description: "Sign up for Mia's Quiz Tournament at /join. Name plus email, a one-time magic link in your inbox, no password to create. Powered by Auth.js."
 ---
 
-Signing up for Mia's Quiz Tournament takes less than a minute. You only need a name and an email address — sign-in is handled exclusively by **MiaAuth (powered by Auth0)**, so there is no password to create or remember. Once you submit the form, MiaAuth emails you a one-time link. Click it and you're automatically enrolled, ready to play when the first round drops.
+Signing up for Mia's Quiz Tournament takes less than a minute at **/join**. You give a display name and an email address, click **Send me a magic link**, and a one-time link arrives in your inbox. Click the link and you're enrolled — no password to create, no second form, no account to confirm.
 
 <Note>
-  Mia's Quiz Tournament uses **MiaAuth (powered by Auth0)** for every sign-up and sign-in. It is the only supported way to access your account — there are no passwords, social logins, or alternate flows.
+  /join is the **new-player door**. It uses a one-time **magic link** sent through Mia's own email pipeline (Resend or Brevo, whichever the host has selected). Returning players can sign in here too, but **/signin** is the faster door for you — it uses the MiaAuth code flow instead. Either page gets you to the same account.
 </Note>
 
-<Steps>
-  <Step title="Go to the join page">
-    Open your browser and navigate to **/join**. You'll see a short form asking for your name and email.
-  </Step>
-  <Step title="Enter your name and email">
-    Type the name you'd like other players to see, then enter your email address. Both fields are required.
-  </Step>
-  <Step title="Click 'Send me a sign-in link'">
-    Hit the **Send me a sign-in link** button. MiaAuth (powered by Auth0) sends a one-time sign-in link to the address you provided.
-  </Step>
-  <Step title="Check your inbox">
-    Open the email with the subject **"Your MiaAuth sign-in link"**. You'll land on a **Check your inbox!** page in the browser — that's the confirmation that the email is on its way.
+## What you'll see
 
-    <Note>
-      Open the MiaAuth link on the same device you used to sign up. The link works **once** and expires after **24 hours**.
-    </Note>
+<Steps>
+  <Step title="Go to /join">
+    Open **/join** in your browser. You'll see a card with two fields:
+
+    - **Your name** — what other players (and Mia) will see on the standings and bracket. Up to 80 characters.
+    - **Your email** — where the magic link lands. This is the address that identifies your account forever, so use one you actually read.
   </Step>
-  <Step title="Click the link and start playing">
-    Tap **Play now →** in the email. MiaAuth verifies the link with Auth0, signs you in, and enrolls you in the tournament automatically. From here, head to **/play** when a round opens.
+  <Step title="Click 'Send me a magic link'">
+    The button creates your account in the tournament database (with the name you just typed) and asks Mia's email provider to send a one-time **magic link** to the address you provided.
+  </Step>
+  <Step title="Land on /join/check-inbox">
+    The browser flips to a **Check your inbox!** confirmation page. The magic-link email is on its way — usually under a minute.
+  </Step>
+  <Step title="Open the email and click 'Play now →'">
+    The email has the subject **"Your magic link"** and a single big button. Click it on the same device. Auth.js verifies the link, signs you in, and bounces you to **/play**.
+
+    <Warning>
+      Magic links are **one-time use** and expire after **24 hours**. If yours has expired or you've already clicked it, head back to /signin and ask for a new one.
+    </Warning>
   </Step>
 </Steps>
 
 <Note>
-  No password is ever required. MiaAuth (powered by Auth0) is the only sign-in method for Mia's Quiz Tournament.
+  No password is ever asked for, set, or stored. The tournament has no password field anywhere.
 </Note>
 
-## Sign-ups may be closed
+## What happens behind the scenes
 
-If the host has paused registrations, you'll see this message on the **/join** page instead of the form:
+When you submit the /join form, the tournament does three things in order:
+
+1. **Validates your name and email** (1–80 chars for name, valid email address up to 254 chars).
+2. **Creates your `users` row** in the tournament database with your chosen display name. If the host's `AUTHOR_EMAIL` matches yours, you're promoted to **author** role at this step.
+3. **Calls Auth.js's email provider** to send the magic link. Auth.js stores a hashed token; the link itself contains the un-hashed half.
+
+When you click the link, Auth.js verifies the token, marks your email as verified, and creates a database-backed session that keeps you signed in across visits.
+
+## "Sign-ups are closed for now"
+
+If the host has paused registrations, the form is hidden and you'll see this message instead:
 
 > Sign-ups are closed for now. The first round drops soon!
 
-When sign-ups reopen, the form appears automatically — no action needed on your part. Check back later or watch for an announcement from the host.
+When sign-ups reopen, the form comes back automatically — no action needed on your part. You'll also see this message if the host **closed registration after the tournament started**; in that case, only players who joined earlier can still sign in. Watch the home page for an announcement when sign-ups reopen.
+
+## Switching browsers or devices
+
+Open the magic-link email **on the same device** you used to sign up. Some mail apps pre-fetch links from a different IP, which can invalidate the token before you get to click it. If your link doesn't work on first click:
+
+1. Go back to **/join** (or /signin) and request a new link.
+2. Open the new email on the device you're actually going to play on.
+3. Click the **Play now →** button — not a preview or "Open link" menu item.
+
+## Already have an account?
+
+You can use /join to sign back in too — the form accepts existing emails and just sends them a new magic link. But the faster path for returning players is **/signin**, which uses the MiaAuth code flow instead of email links. See the [Sign In guide](/signing-in) for details.
 
 <Tip>
-  Already have an account? You can use **/join** to sign back in too, or go straight to [/signin](/signing-in) for a shorter form. Either way, MiaAuth handles the sign-in.
+  /join is the only entry point that lets you pick a display name. If you ever want to change yours, ask Mia — name changes happen on the host side, not yours.
 </Tip>
 
 <Badge color="green">N</Badge>

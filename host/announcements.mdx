@@ -55,7 +55,7 @@ The **Format** dropdown lets you choose between plain text and a set of pre-buil
 
 When you select a template, its fields appear for you to fill in. A **Show preview** button renders the email in an iframe so you can see exactly what recipients will receive.
 
-All emails are sent from **Mia's Quiz Tournament** using the same picture-book styling as the MiaAuth (Auth0) sign-in emails.
+All emails are sent from **Mia's Quiz Tournament** using the same picture-book styling as the magic-link sign-in emails. (Auth0's MiaAuth code emails are styled by Auth0, not by the tournament.)
 
 ### How to send an announcement
 
@@ -96,6 +96,6 @@ Click **Save countdown** to apply. The current state (showing or hidden, and the
 
 ## Email provider
 
-Announcements and MiaAuth (Auth0) sign-in emails both go through the same provider — either **Resend** or **Brevo**. You can switch between them from the **Email provider** section on the host panel if you are approaching one provider's sending limits. The switch takes effect within approximately 30 seconds.
+Announcements + the **legacy magic-link sign-in emails** both go through the same provider — either **Resend** or **Brevo**. You can switch between them from the **Email provider** section on the host panel if you are approaching one provider's sending limits. The switch takes effect within approximately 30 seconds. Auth0's MiaAuth code emails are sent by Auth0's own delivery pipeline and are unaffected by this setting.
 
 To review delivery results and open rates, go to **Emails** (`/host/email-analytics`) from the host panel navigation links.

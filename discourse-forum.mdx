@@ -1,0 +1,65 @@
+---
+title: "The Discourse Forum: Hot Takes, Predictions, Banter"
+description: "Mia's Quiz Tournament has an attached Discourse forum at discuss.miaswebsites.art. Sign in once on the quiz site and your forum login follows automatically via DiscourseConnect."
+---
+
+The tournament has its own **Discourse forum** at **discuss.miaswebsites.art** — for hot takes, week-by-week banter, and the **Tournament Talk** category. You don't need a separate account: the forum trusts the quiz site's sign-in via **DiscourseConnect** (formerly known as Discourse SSO), so signing in once on the quiz site is enough for both places.
+
+<Note>
+  You do need a tournament account first. Visit [/join](/joining) before clicking "Sign in" on the forum — DiscourseConnect can only mirror an identity that already exists on the quiz site.
+</Note>
+
+## How sign-in works
+
+When you click **Sign in** on the forum:
+
+<Steps>
+  <Step title="Discourse bounces you to quiz.miaswebsites.art">
+    Discourse builds a signed payload and redirects you to `quiz.miaswebsites.art/api/discourse/sso`. The quiz site verifies Discourse's signature before doing anything.
+  </Step>
+  <Step title="The quiz site checks your session">
+    If you're already signed in (via MiaAuth or magic link), the quiz site uses that session immediately. If not, it sends you to /signin first — sign in there, then continue.
+  </Step>
+  <Step title="The quiz site signs a response and sends you back">
+    Once your identity is confirmed, the quiz site builds a signed payload containing your email, display name, and avatar, and redirects you back to Discourse.
+  </Step>
+  <Step title="Discourse creates or updates your forum account">
+    On first arrival, Discourse creates your forum account using the data the quiz site sent. On every subsequent sign-in, Discourse just updates your profile and logs you in. No welcome email, no separate verification.
+  </Step>
+</Steps>
+
+## What gets shared with the forum
+
+Each successful sign-in shares the following with Discourse:
+
+| Field | Value |
+|---|---|
+| **Email** | The address on your quiz account. Discourse uses it as the canonical identity. |
+| **External ID** | Your `users.id` from the tournament — stable across name and email changes. |
+| **Display name** | Your tournament name. If you rename yourself in the tournament, your forum name follows. |
+| **Avatar** | The avatar you set on the quiz site (if any). |
+| **Admin / moderator flag** | Auto-granted on the forum when your tournament `role === "author"`. Mia + Sam get full forum control with no extra setup. |
+| **Group membership** | The tournament keeps Discourse groups like `players`, `semi_finalists`, and `finalists` in lockstep with the bracket. Each successful sign-in resyncs your group memberships. |
+
+<Note>
+  Discourse never sees a password because there isn't one. The forum trusts the quiz site's session entirely.
+</Note>
+
+## What you'll see
+
+- **First time you sign in**: Discourse skips its "Welcome!" email — you already know what the site is — and lands you on the homepage with your tournament name and avatar.
+- **Every time after**: The sign-in is invisible. You click **Sign in** on the forum, the page flashes, and you're signed in.
+
+## Signing out
+
+Signing out of Discourse only signs you out of the forum — your quiz-site session is unaffected. To sign out of both, sign out of the quiz site from its app menu; your forum session will end the next time it needs to check in.
+
+## Forum categories worth bookmarking
+
+- **Tournament Talk** — predictions, week-over-week recaps, hot takes about who's about to lose a heart.
+- **Finals Room** — finalists-only category for the people still in it.
+- Your eliminated friends can still post in the public categories — they just lose access to the finals one.
+
+<Tip>
+  Cross-link: if you want the host-side of forum SSO (group sync, admin promotion, signature verification), see [MiaAuth in the Host Guide](/host/miaauth). DiscourseConnect re-uses the same Auth.js session — there's no separate auth dance.
+</Tip>

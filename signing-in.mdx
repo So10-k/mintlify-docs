@@ -1,41 +1,83 @@
 ---
-title: "Sign In to Mia's Quiz Tournament with MiaAuth"
-description: "Already registered? Sign back in to Mia's Quiz Tournament using MiaAuth (powered by Auth0). One-time link to your inbox — no password ever."
+title: "Sign in to Mia's Quiz Tournament with MiaAuth"
+description: "Already registered? Sign back in through MiaAuth — a one-time code sent to your email, no password ever. Powered by Auth0 by Okta."
 ---
 
-If you've already joined the tournament, you don't need to sign up again. Head to **/signin**, enter your email address, and **MiaAuth (powered by Auth0)** sends a fresh one-time sign-in link straight to your inbox. Click the link and you're signed in with your existing account, lives, and score all intact.
+If you've already joined the tournament, you don't need to sign up again. Head to **/signin** and tap **Sign in with MiaAuth**. MiaAuth — the tournament's email-only sign-in flow, powered by Auth0 by Okta — sends a one-time code to your inbox. Enter the code and you're back in with your account, hearts, and scores intact.
 
 <Note>
-  Sign-in is handled exclusively by **MiaAuth (powered by Auth0)**. There are no passwords, no social providers, and no alternate sign-in flows — every sign-in goes through MiaAuth.
+  MiaAuth is the everyday sign-in method. There are no passwords, no social logins, and no SSO buttons. If you're a returning player, this is the page you want.
 </Note>
 
+## The two-screen sign-in
+
 <Steps>
-  <Step title="Go to the sign-in page">
-    Navigate to **/signin** in your browser. You'll see a single email field.
+  <Step title="Go to /signin">
+    Open **/signin** in your browser. You'll see one big button labeled **Sign in with MiaAuth**.
   </Step>
-  <Step title="Enter your email address">
-    Type the email address you used when you first joined, then click **Email me a sign-in link**.
-  </Step>
-  <Step title="Check your inbox">
-    MiaAuth sends an email with the subject **"Your MiaAuth sign-in link"**. The browser also shows a **Check your inbox!** confirmation page so you know the email is on its way.
+  <Step title="Tap 'Sign in with MiaAuth'">
+    The button hands you to Auth0's hosted page. Type the same email address you used when you joined, then ask Auth0 to send you a code.
 
     <Warning>
-      MiaAuth links are **one-time use** and expire after **24 hours**. If yours has expired or you've already clicked it, go back to **/signin** and request a new one.
+      Use the **same email** you signed up with. MiaAuth identifies you by email — a different address opens a new account, not your existing one.
     </Warning>
   </Step>
-  <Step title="Click the link and continue playing">
-    Open the email on the same device and tap **Play now →**. MiaAuth verifies the link with Auth0 and takes you directly to **/play**.
+  <Step title="Check your inbox for a code">
+    The email arrives within a few seconds. Open it, copy the **6-digit code**, and paste it into the Auth0 prompt. The code expires after a short window; if it times out, just ask for a new one.
+  </Step>
+  <Step title="You land back on /play">
+    Once Auth0 accepts the code, you're redirected straight to **/play**, signed in. Your hearts, scores, and standing all come back with you.
   </Step>
 </Steps>
 
 <Note>
-  No password is needed at any point. Every sign-in uses a fresh MiaAuth (powered by Auth0) link sent to your email.
+  No password is needed at any point. Every sign-in uses a fresh MiaAuth code sent to your email.
 </Note>
 
-## Can't find your MiaAuth email?
+## What you'll see on the sign-in card
 
-Check your spam or junk folder first. If the email still hasn't arrived after a minute or two, return to **/signin** and request another one. Each request generates a new MiaAuth link, so any older links are no longer valid once you submit again.
+The /signin card shows three reassurance badges and one line of footer text:
+
+- 🛡️ **Bank-grade** — Auth0 is the same identity platform used by Fortune 500 companies, banks, and healthcare systems.
+- 🔑 **No passwords** — There's no password field. There never was.
+- ⚡️ **10s sign-in** — Average round-trip on a typical inbox is about ten seconds.
+
+The footer reminds you: **Sign-in is powered by Auth0 by Okta** — your email never touches Mia's servers without MFA-grade protection.
+
+## "Registration's closed" — what it means
+
+If MiaAuth bounces a brand-new email with a friendly **"Registration's closed for now"** banner, that's the tournament's sign-up gate, not a MiaAuth error. Existing players sail through; new emails are blocked until the host opens registration. If you're sure you have an account, double-check the email address — a typo will look like a new account to MiaAuth.
+
+## Can't find your code email?
+
+Check your spam or junk folder first. If nothing arrives after a minute or two:
+
+1. Go back to **/signin** and request another code. Each request invalidates older ones.
+2. Make sure the address is typed exactly right (one stray character is the most common cause).
+3. Add the sender domain to your address book so future codes skip the spam filter.
 
 <Tip>
-  You can also use **/join** to sign back in — it accepts both new and returning players and works exactly the same way through MiaAuth.
+  You can also use **/join** to sign back in. /join is mostly aimed at new players, but it accepts returning players too — same account, same hearts, just a slightly longer form.
 </Tip>
+
+## Legacy magic-link fallback (break-glass only)
+
+If Auth0 is having an outage and you absolutely need to sign in, append **`?legacy=1`** to the /signin URL. A second form appears below the MiaAuth button: enter your email and you'll get a one-time **magic link** (subject: **"Your magic link"**) sent through Mia's own email pipeline. Click the link in the email and you're signed in.
+
+<Warning>
+  The legacy magic-link flow is intentionally not advertised on the sign-in page. It works, but you only need it when Auth0 itself is unreachable. Treat it as a break-glass option.
+</Warning>
+
+## Quick reference
+
+| Property | Value |
+|---|---|
+| Sign-in page | `/signin` |
+| Primary method | **MiaAuth** — Auth0 passwordless email (one-time code) |
+| Break-glass fallback | Email magic-link, surfaced via `?legacy=1` |
+| Passwords | Never required, never stored |
+| Social / SSO providers | None — email only, by design |
+| Code lifetime | A few minutes (Auth0 enforces; request a new one if it expires) |
+| Magic-link lifetime (legacy) | 24 hours |
+| Session lifetime | Until you sign out or the session naturally expires |
+| Where to view delivery logs (host) | `/host/email-analytics` |
