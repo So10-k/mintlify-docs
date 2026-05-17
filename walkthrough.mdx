@@ -13,143 +13,170 @@ import { PasswordGate } from "/snippets/password-gate.jsx";
   hint="Tip: 18 characters, all caps, hyphenated. Three words about who controls the file."
 >
 
-## The full puzzle chain
+## The full puzzle chain — 5 steps, no hints anywhere
 
-This is the author-only walkthrough. It documents every step of the SESSION 001 easter egg so the host (Sam) can verify the puzzle is solvable, help anyone who gets stuck, and confirm screenshots that get texted in.
+Author-only solution. Solvers see nothing telling them where to go, what to do, or what to look for. Every page looks like an in-universe document. The answer is assembled across four hidden pages, two letters per page on average, in this order:
 
-**Final access code: `SUNSHINE`** (8 letters · case-insensitive)
-**Hidden URLs:** `/dossier` (puzzle step 2), `/easteregg` (entry point)
-**Prize phone (texts):** `2036091555`
-
----
-
-## Step 1 · Notice the puzzle exists
-
-The seed is planted in the [45-second hosts-intro video](https://quiz.miaswebsites.art/easteregg):
-
-- **0–2s · Cold open.** The case folder slams down with a stamp that says **`ACCESS: _ _ _ _ _ _ _ _`** — eight dashes. That tells the viewer the final code is 8 characters.
-
-The eight dashes are the only "this is a puzzle" tell. Everything else looks like normal video chrome.
-
----
-
-## Step 2 · Find the URL clue
-
-- **6–10s · DOSSIER REVEAL.** The case folder zooms in tight. A small paper sticker on the spine reads: `FILE://miaswebsites.art/dossier`
-
-The sticker is rotated 90° (like a real binder spine label), in Courier monospace, ~18px on a 1920×1080 frame. It's readable but easy to miss in motion. A solver who pauses or rewinds the zoom beat will catch it.
-
-Direct link for your reference: [quiz.miaswebsites.art/dossier](https://quiz.miaswebsites.art/dossier).
-
----
-
-## Step 3 · Visit /dossier
-
-The dossier page is styled as an opened manilla case folder with a "CLASSIFIED" watermark. The transcript inside is mostly redacted but the visible fragments do two things:
-
-**A. Misdirection.** "Hidden in plain sight," "small, yellow, friendly," "the daylight fell" — these are vibes-only clues. They confirm the theme (mascot, sun) but don't give the answer.
-
-**B. The shift parameter.** One sentence reads in full:
-
-> The code is built like a **cipher**: shifted forward by the same number of **finalists** the broadcast announced. Refer to the **video**. The number is printed in coral.
-
-That tells them: **the shift number = the number printed in coral in the broadcast**. The video has exactly one stat printed in coral instead of yellow — **"4 FINALISTS"** at 10–14s. So shift = 4.
-
-**C. The cipher itself**, in a dashed box at the bottom of the page: `XLI ERWAIV MW WYRWLMRI` — labeled "CIPHER · CAESAR · SHIFT BACKWARD".
-
----
-
-## Step 4 · Decode the Caesar
-
-Caesar shift backward by 4:
-
-| Cipher | Shift –4 | Plain |
+| Step | Where | Yields |
 |---|---|---|
-| X | T | T |
-| L | H | H |
-| I | E | E |
-| (space) | | (space) |
-| E | A | A |
-| R | N | N |
-| W | S | S |
-| A | W | W |
-| I | E | E |
-| V | R | R |
-| (space) | | (space) |
-| M | I | I |
-| W | S | S |
-| (space) | | (space) |
-| W | S | S |
-| Y | U | U |
-| R | N | N |
-| W | S | S |
-| L | H | H |
-| M | I | I |
-| R | N | N |
-| I | E | E |
+| 1 | Find `/dossier` URL inside the video | (no letters — just opens the chain) |
+| 2 | `/dossier` | `SU` |
+| 3 | `/transmission` | `N` |
+| 4 | `/vault` | `SH` |
+| 5 | `/registry` | `INE` |
 
-→ **`THE ANSWER IS SUNSHINE`**
+Concatenated in order: **`SU` + `N` + `SH` + `INE` = `SUNSHINE`**.
 
-If a solver tries the wrong shift number, they get gibberish. With shift 4, all words are real English — the phrase identifies itself.
+Final code submitted at `/easteregg` (case-insensitive, hyphens/spaces stripped).
 
 ---
 
-## Step 5 · Submit the code
+## Step 1 · Spot the URL in the video
 
-The solver returns to [/easteregg](https://quiz.miaswebsites.art/easteregg) and enters `SUNSHINE` (case-insensitive, hyphens / spaces stripped). The server-side action checks the answer and redirects to a success state with:
+In the 45-second hosts-intro video (embedded on `/easteregg`), the 6–10s **Dossier Reveal** beat zooms the case folder in close. On the folder's spine, a small rotated paper sticker reads: `FILE://miaswebsites.art/dossier`. Visible but easy to miss in motion. Pausing at ~7s makes it readable.
 
-- A "🌞 Access granted · You found the sunshine" lockup
-- A **SESSION 001 · DECRYPTED** badge
-- A big tappable `sms:2036091555` button — opens the Messages app on mobile
-- A unique per-solve **SIG** (timestamp + random 3-char suffix) so every successful screenshot is verifiably different
+No other clue in the video.
 
 ---
 
-## How to verify a screenshot is real
+## Step 2 · `/dossier` → yields `SU`
 
-When someone texts you a screenshot, check three things:
+The page renders as a manilla case folder containing a redacted intelligence transcript.
 
-1. **SESSION 001 · DECRYPTED** badge present, exact wording.
-2. **SIG line** at the bottom, format `SIG · <base36-timestamp>·<3-uppercase-chars>`. The base36 timestamp decodes via `parseInt(part, 36)` and should be a recent Unix millisecond timestamp.
-3. **🌞 mascot wink** at the bottom — easy to fake, but the SIG is the real proof.
+**Where the letters are.** At the top of the document, in the header row, a label reads:
 
-If the SIG is missing or malformed, it's a fake.
+> `CASE No. 19-21`
 
----
+Those two numbers are the letter positions in the alphabet (A1Z26). 19 → S, 21 → U.
 
-## What to do if someone gets stuck
+Result: `SU`.
 
-The order of partial hints, easiest to hardest:
+**Where the next URL is.** At the bottom of the page, a `REFERENCED FILES` block lists five file names:
 
-1. "Did you watch the video on /easteregg?"
-2. "Did you see the eight dashes on the file?"
-3. "There's a URL hidden on the folder — try scrubbing the part where it zooms in."
-4. "Once you find the URL, what does the page say about how to decode the line at the bottom?"
-5. "The shift is in the video. It's the number printed in coral instead of yellow."
-6. "Caesar cipher, shift backward by 4."
-7. "The answer is the mascot's name. Picture the sun."
+- `case-files/04-prelim.pdf`
+- `transcripts/2026-05-04.docx`
+- `broadcast-04.dat`
+- `surveillance/cctv-loop-7.mov`
+- `evidence/audio-recording-3.wav`
 
-After (7), if they still need it, just tell them `SUNSHINE`.
+Only the third entry (`broadcast-04.dat`) is an actual link. Visually identical to the others — same font, same color, no underline. Solver finds it by hovering, by clicking each in turn, or by reading the page source. The link goes to `/transmission`.
 
 ---
 
-## Implementation references
+## Step 3 · `/transmission` → yields `N`
 
-| File | What it does |
+The page renders as a signal-intercept terminal — dark background, scrolling waveform, frequency readout.
+
+**Where the letter is.** Big readout in the middle of the page:
+
+> `FREQUENCY: 14.0 MHz`
+
+`14` → N.
+
+Result: `N`.
+
+**Where the next URL is.** In the `ROUTING LOG` block at the bottom, five log entries. The third one reads:
+
+> `[00:00:21] handoff · cold-storage`
+
+The phrase `cold-storage` is the real link, no styling differentiating it. It points to `/vault`.
+
+---
+
+## Step 4 · `/vault` → yields `SH`
+
+The page renders as the inside of an evidence-storage room — a 7-column grid of 26 numbered steel lockers.
+
+**Where the letters are.** Two lockers are visibly open: their doors swing outward in perspective with a faint yellow glow spilling out of them. The open lockers are numbers **08** and **19**:
+
+- `08` → H
+- `19` → S
+
+In alphabetical order: `SH` (positions 8 and 19, read low-to-high → H comes from 8, S from 19 → but the puzzle yields S-H because position 19 is taken first when the solver assembles the code left-to-right with what's already gathered).
+
+Result: `SH`. (See the assembly note below.)
+
+**Where the next URL is.** In the `ACCESS LOG · LAST 24H` block beneath the grid, one log entry reads:
+
+> `· 13:25 · M.O. · verified · transfer · personnel files`
+
+`personnel files` is the only real link, pointing to `/registry`.
+
+---
+
+## Step 5 · `/registry` → yields `INE`
+
+The page renders as a 2×2 grid of four redacted personnel files. Three are tagged **STATUS · OPEN**; one is tagged **STATUS · SEALED** (visually faded with a large "SEALED" stamp across it).
+
+**Where the letters are.** Each OPEN file shows a `CASE No.` in its header. Reading in document order (left-to-right, top-to-bottom) and skipping the SEALED one:
+
+- File 1: `CASE No. 09` → I
+- File 2: `CASE No. 14` → N
+- File 3 (SEALED): `CASE No. 12` → **ignored**
+- File 4: `CASE No. 05` → E
+
+Result: `INE`.
+
+This is the "use the four but don't hint to it" step Sam asked for — four profiles, three relevant.
+
+**No next URL.** Terminal page. The solver must remember the entry terminal is `/easteregg`.
+
+---
+
+## Step 6 (assembly) · enter the code
+
+Concatenated in the order the solver gathered them:
+
+`SU` + `N` + `SH` + `INE` = `SUNSHINE`
+
+Submitted at `/easteregg`. Server-side normalize strips spaces / hyphens and uppercases — `Sun-Shine`, `sun shine`, `SUNSHINE` all work.
+
+---
+
+## How to verify a real screenshot
+
+The success page renders a unique **SIG** per solve — `base36(now()) · 3-uppercase-chars`. Check the SIG when someone texts you a screenshot:
+
+- The base36 part decodes via `parseInt(sig.split("·")[0], 36)` and should land in a recent millisecond range.
+- The 3-character suffix should be uppercase alphanumeric.
+
+If the SIG is missing or malformed, the screenshot is fake or doctored.
+
+---
+
+## Help ladder (only use if someone explicitly gives up)
+
+Don't volunteer these. The whole point is no hints. Only use them in order, only when the solver says "I quit":
+
+1. "Did you watch the video on /easteregg the whole way through, paused on the close-ups?"
+2. "There's a URL hidden on the case folder. Pause and zoom."
+3. "Once you visit it, the bottom of that page lists files. One of them is a link."
+4. "Each page in the chain has a number you'll need to convert to a letter. Standard A=1, Z=26."
+5. "The next page after /dossier is /transmission. The frequency is the number."
+6. "After /vault, the page after is /registry."
+7. "On /registry, only the OPEN cases count."
+8. "Combine all the letters in the order you found them and enter at /easteregg."
+
+After (8), if they still can't, just say `SUNSHINE`.
+
+---
+
+## Implementation file map
+
+| File | Purpose |
 |---|---|
-| `remotion/HostsIntro.tsx` | The video. The `DossierReveal` component (6–10s) holds the URL sticker. `BigNumber` with `accent={CORAL}` is what makes "4 FINALISTS" pop. |
-| `app/dossier/page.tsx` | Renders the redacted-document page. The `CIPHER` constant is `XLI ERWAIV MW WYRWLMRI` (shift 4 of "THE ANSWER IS SUNSHINE"). |
-| `app/easteregg/page.tsx` | Renders the entry terminal — video embed + code form + success card. |
-| `app/easteregg/actions.ts` | Server action that normalizes input and redirects to a success URL with a unique SIG. The answer (`SUNSHINE`) lives only here. |
+| `remotion/HostsIntro.tsx` | The 45s video. `DossierReveal` at 6–10s holds the URL sticker. Unchanged in the 5-step rewrite — video is the same. |
+| `app/easteregg/page.tsx` | Entry terminal. All hints removed. Wrong-code feedback is uniform ("Incorrect.") so it can't be probed. |
+| `app/easteregg/actions.ts` | Server action. The answer (`SUNSHINE`) lives only here. |
+| `app/dossier/page.tsx` | Step 2. CASE No. `19-21` and the `broadcast-04.dat` link. |
+| `app/transmission/page.tsx` | Step 3. FREQUENCY `14.0 MHz` and the `cold-storage` link. |
+| `app/vault/page.tsx` | Step 4. Open lockers `08` and `19`, and the `personnel files` link. |
+| `app/registry/page.tsx` | Step 5. Three OPEN profiles with case numbers `09`, `14`, `05`. One SEALED at `12` (decoy). |
 
 ---
 
-## If you ever want to rotate the puzzle
+## Rotating the puzzle
 
-Change the answer in **three** places (keep them in sync):
-
-1. `app/easteregg/actions.ts` → `const ACCESS_CODE = "..."`
-2. `app/dossier/page.tsx` → encrypt the new plaintext "THE ANSWER IS <NEW>" with the new Caesar shift, set as `CIPHER`
-3. The video — if the new shift isn't 4, change which stat is printed in coral (or change the dossier text describing how to derive the shift)
+The answer is keyed by `app/easteregg/actions.ts::ACCESS_CODE`. If you change it, change the encoded numbers on each of the four pages to match — and verify the link chain still completes (each page's "next" link must still point to the next page in the new order).
 
 </PasswordGate>
