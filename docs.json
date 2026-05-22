@@ -79,6 +79,17 @@
         ]
       },
       {
+        "tab": "Changelog",
+        "groups": [
+          {
+            "group": "Changelog",
+            "pages": [
+              "changelog/overview"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Host Guide",
         "groups": [
           {
