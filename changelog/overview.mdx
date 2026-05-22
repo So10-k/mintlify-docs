@@ -1,0 +1,35 @@
+---
+title: "Changelog"
+sidebarTitle: "Overview"
+description: "What's new in Mia's Quiz Tournament — features, updates, and fixes."
+icon: "newspaper"
+---
+
+<Update label="May 22, 2026" tags={["features", "updates", "fixes"]}>
+
+## New features
+
+**Sign in with MiaAuth.** Returning players can now sign in at [`/signin`](https://quiz.miaswebsites.art/signin) with a one-time code sent to their email — no magic link click required. Your account, hearts, and scores carry over. See [Signing in](/signing-in).
+
+**Bracket Predictions.** Call the winner of every matchup before the results are in and compete on a separate predictions leaderboard. Visit [`/predict`](https://quiz.miaswebsites.art/predict) to make your picks; deeper-round correct picks are worth more points. See [Bracket Predictions](/tournament/predictions).
+
+**Double-elimination bracket.** The tournament now runs a winners' and losers' bracket side-by-side. Lose on the winners' side and you drop to losers — where you can still climb back to the final. Both brackets are visible on the [bracket page](/tournament/bracket), and one chapter quiz now resolves matchups in both brackets at the same time. See [The Grand Final](/finals/overview).
+
+**Miamail inbox.** Every tournament email Mia sends now also lands in your in-app inbox at `/miamail`, so you can re-read announcements and recap emails without digging through your email client.
+
+**Live countdowns.** Hosts can pin a live countdown to the next round on the landing page and [`/play`](https://quiz.miaswebsites.art/play), so you always know when the next chapter drops.
+
+## Updates
+
+**Clearer prediction progress.** The picks counter on `/predict` and `/predict/play` now reads `X / total · Y pickable now` — the number you've picked can never exceed the total, and you can see at a glance how many are open to pick right now.
+
+**Picks cascade through your bracket.** Your [`/predict`](https://quiz.miaswebsites.art/predict) overview now shows your picks carrying forward into later rounds: direct picks are marked with a coral ★, and names auto-filled from earlier-round picks are highlighted so you can see your whole predicted path at once.
+
+**Bye matchups are labelled.** Auto-advance slots in the bracket now show **BYE** instead of an empty dash, including the new one-person slot in the losers' bracket created by a late-add player.
+
+## Fixes
+
+- **Predictions now save reliably.** Picks for round 2 and beyond no longer drop silently. Every save shows a "saving… / ✓ saved / ⚠ save failed" indicator, and a failed save rolls back instead of leaving the UI out of sync.
+- **Sign-out actually signs you out everywhere.** Tapping **Sign out** now ends both your tournament session and your MiaAuth session, so the next sign-in re-prompts cleanly.
+
+</Update>
